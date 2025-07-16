@@ -17,15 +17,11 @@ function Todo() {
     setInput(""); 
   }
 
-  function toggleComplete(id) {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
-  }
+
 
   const listTasks = tasks.map((task, index) => (
     <div>
-      <li key={index}>{task}</li><button onClick={toggleComplete}>Complete</button>
+      <li key={task.id}>{task.title}</li><button>Complete</button>
     </div>
   ));
   return (
