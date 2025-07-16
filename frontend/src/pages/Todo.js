@@ -8,12 +8,25 @@ function Todo() {
     if (input.trim() === "") {
       return; 
     }
-    setTasks([...tasks, input]);
+    const newTask = {
+      id: Date.now,
+      title: input,
+      completed: false,
+    };
+    setTasks([...tasks, newTask]);
     setInput(""); 
   }
 
+  function toggleComplete(id) {
+    setTasks(tasks.map(task => 
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  }
+
   const listTasks = tasks.map((task, index) => (
-    <li key={index}>{task}</li>
+    <div>
+      <li key={index}>{task}</li><button onClick={toggleComplete}>Complete</button>
+    </div>
   ));
   return (
     <div>
