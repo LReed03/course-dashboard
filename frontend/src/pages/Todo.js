@@ -9,7 +9,7 @@ function Todo() {
       return; 
     }
     const newTask = {
-      id: Date.now,
+      id: Date.now(),
       title: input,
       completed: false,
     };
