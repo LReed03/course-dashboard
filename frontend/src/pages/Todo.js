@@ -17,11 +17,14 @@ function Todo() {
     setInput(""); 
   }
 
+  function removeTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
 
 
-  const listTasks = tasks.map((task, index) => (
+  const listTasks = tasks.map((task) => (
     <div>
-      <li key={task.id}>{task.title}</li><button>Complete</button>
+      <li key={task.id}>{task.title}</li><button onClick={() => removeTask(task.id)}>Complete</button>
     </div>
   ));
   return (
