@@ -1,16 +1,42 @@
-export function saveTasks(){
+export async function addTask(task){
+    const backendEndpoint = "http://localhost:5000/tasks";
+    try{
+        const response = await fetch(backendEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        });
+        return await response.json();
+    }
+    catch (error) {
+        console.error("Error adding task:", error);
+    }
+}
+
+export async function loadTasks() {
+    const backendEndpoint = "http://localhost:5000/tasks";
+    try{
+        const response = await fetch(backendEndpoint, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const data = await response.json();
+        return data || [];
+    }catch (error) {
+        console.error("Error loading tasks:", error);
+        return [];
+    }
+}
+
+export function updateTask() {
 
 }
 
-export function loadTasks() {
 
-}
-
-export function updateTasks() {
-
-}
-
-
-export function deleteTasks() {
+export function deleteTask() {
 
 }

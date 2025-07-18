@@ -1,10 +1,20 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import {addTask, loadTasks, deleteTask, updateTask} from "../api/TodoAPI"; 
 function Todo() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
 
-  function addTask() {
+  async function fetchData() {
+    const taskList = await loadTasks();  
+    setTasks(taskList);                 
+  }
+
+  useEffect(() => {
+    fetchData();  
+  }, []);
+
+
+  function handleAdd() {
     if (input.trim() === "") {
       return; 
     }
@@ -13,8 +23,9 @@ function Todo() {
       title: input,
       completed: false,
     };
-    setTasks([...tasks, newTask]);
+    addTask(newTask);
     setInput(""); 
+    fetchData();
   }
 
   function removeTask(id) {
@@ -30,7 +41,7 @@ function Todo() {
   return (
     <div>
       <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-      <button onClick={addTask}>Add Task</button>
+      <button onClick={handleAdd}>Add Task</button>
       <ol>{listTasks}</ol>
     </div>
   );
