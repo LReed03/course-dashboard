@@ -26,7 +26,8 @@ export async function loadTasks() {
         });
         const data = await response.json();
         return data || [];
-    }catch (error) {
+    }
+    catch (error) {
         console.error("Error loading tasks:", error);
         return [];
     }
@@ -37,6 +38,19 @@ export function updateTask() {
 }
 
 
-export function deleteTask() {
-
+export function deleteTask(task) {
+    const backendEndpoint = "http://localhost:5000/tasks";
+    try{
+        const response = await fetch(backendEndpoint, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(task)
+        });
+        return await response.json();
+    }
+    catch (error) {
+        console.error("Error loading tasks:", error);
+    }
 }

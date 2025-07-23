@@ -28,14 +28,15 @@ function Todo() {
     fetchData();
   }
 
-  function removeTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id));
+  function removeTask(task) {
+    deleteTask(task);
+    fetchData();
   }
 
 
   const listTasks = tasks.map((task) => (
     <div>
-      <li key={task.id}>{task.title}</li><button onClick={() => removeTask(task.id)}>Complete</button>
+      <li key={task.id}>{task.title}</li><button onClick={() => removeTask(task)}>Complete</button>
     </div>
   ));
   return (
