@@ -1,10 +1,22 @@
 import './App.css';
 import Todo from './pages/Todo';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Landing from './pages/Landing';
+import Dashboard from './pages/Dashboard';  
+import Schedule from './pages/Schedule';
+
 
 function App() {
   return (
     <div>
-      <Todo />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/todo" element={<Todo/>} />
+          <Route path="/schedule" element={<Schedule/>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

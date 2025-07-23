@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import {addTask, loadTasks, deleteTask, updateTask} from "../api/TodoAPI"; 
+import "../styles/Todo.css";
+import Header from "../components/Header";
 function Todo() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
@@ -41,6 +43,7 @@ function Todo() {
   ));
   return (
     <div>
+      <Header />
       <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
       <button onClick={handleAdd}>Add Task</button>
       <ol>{listTasks}</ol>
