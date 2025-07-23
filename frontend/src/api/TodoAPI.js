@@ -38,7 +38,7 @@ export function updateTask() {
 }
 
 
-export function deleteTask(task) {
+export async function deleteTask(task) {
     const backendEndpoint = "http://localhost:5000/tasks";
     try{
         const response = await fetch(backendEndpoint, {

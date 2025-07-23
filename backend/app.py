@@ -17,7 +17,7 @@ def add_task():
         return jsonify({"message": "Task added"}), 201
     return jsonify({"error": "No task provided"}), 400
 
-@app.route("/taks", methods=["DELETE"])
+@app.route("/tasks", methods=["DELETE"])
 def delete_task():
     task = request.json
     if task in tasks:
