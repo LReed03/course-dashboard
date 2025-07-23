@@ -44,9 +44,11 @@ function Todo() {
   return (
     <div>
       <Header />
-      <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-      <button onClick={handleAdd}>Add Task</button>
-      <ol>{listTasks}</ol>
+      <div className="todo">
+        <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
+        <button onClick={handleAdd}>Add Task</button>
+      </div>
+      <ul>{listTasks}</ul>
     </div>
   );
 }
