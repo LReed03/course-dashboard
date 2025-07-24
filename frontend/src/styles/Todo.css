@@ -7,6 +7,7 @@
     width: 300px;
     padding: 10px;
     margin-right: 10px;
+    margin-left: 10px;
     border-radius: 12px;
     border: 1.25px solid black;
 }
@@ -24,4 +25,8 @@
 
 .todo button:hover {
     background-color: #45a049;
+}
+
+.todo select{
+    width: 75px;
 }
