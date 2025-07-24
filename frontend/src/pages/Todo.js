@@ -26,10 +26,11 @@ function Todo() {
     if (input.trim() === "") {
       return; 
     }
-
+    /*
     if (courseID === null){
       return;
     } 
+      */
     const newTask = {
       id: Date.now(),
       title: input,

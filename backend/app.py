@@ -31,11 +31,11 @@ def delete_task():
 "Course APIs"
 
 @app.route("/courses", methods=["GET"])
-def get_tasks():
-    return jsonify(tasks)
+def get_courses():
+    return jsonify(courses)
 
 @app.route("/courses", methods=["POST"])
-def add_task():
+def add_course():
     course = request.json
     if course:
         courses.append(course)
