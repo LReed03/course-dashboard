@@ -4,6 +4,9 @@ app = Flask(__name__)
 CORS(app)
 
 tasks = []
+courses = []
+
+"Task APIS"
 
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
@@ -24,6 +27,20 @@ def delete_task():
         tasks.remove(task) 
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
+
+"Course APIs"
+
+@app.route("/courses", methods=["GET"])
+def get_tasks():
+    return jsonify(tasks)
+
+@app.route("/courses", methods=["POST"])
+def add_task():
+    course = request.json
+    if course:
+        courses.append(course)
+        return jsonify({"message": "Course added"}), 201
+    return jsonify({"error": "No course provided"}), 400
         
 
 if __name__ == "__main__":

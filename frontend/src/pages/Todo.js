@@ -8,7 +8,7 @@ function Todo() {
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
-  const [courseID, setCourseID] = useState();
+  const [courseID, setCourseID] = useState(null);
 
   async function fetchData() {
     let taskList = await loadTasks();
@@ -26,6 +26,10 @@ function Todo() {
     if (input.trim() === "") {
       return; 
     }
+
+    if (courseID === null){
+      return;
+    } 
     const newTask = {
       id: Date.now(),
       title: input,
