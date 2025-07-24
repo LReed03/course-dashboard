@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {addTask, loadTasks, deleteTask, updateTask} from "../api/TodoAPI"; 
 import "../styles/Todo.css";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 function Todo() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
@@ -49,6 +50,7 @@ function Todo() {
         <button onClick={handleAdd}>Add Task</button>
       </div>
       <ul>{listTasks}</ul>
+      <Footer/>
     </div>
   );
 }
