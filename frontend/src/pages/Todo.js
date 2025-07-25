@@ -26,11 +26,11 @@ function Todo() {
     if (input.trim() === "") {
       return; 
     }
-    /*
+
     if (courseID === null){
       return;
     } 
-      */
+  
     const newTask = {
       id: Date.now(),
       title: input,
@@ -58,7 +58,11 @@ function Todo() {
     <div>
       <Header />
       <div className="todo">
-        <select></select>
+        <select>{courses.map(course =>
+          <option key={course.id} value={course.id} onClick={() => setCourseID(course.id)}>
+            {course.code}
+          </option>
+        )}</select>
         <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
         <button onClick={handleAdd}>Add Task</button>
       </div>

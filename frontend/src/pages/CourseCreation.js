@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { loadCourses } from "../api/courseAPI";
+import { loadCourses, addCourse } from "../api/courseAPI";
+import { useNavigate } from "react-router-dom";
+
 
 function CourseCreation() {
   const [courses, setCourses] = useState([]);
@@ -11,6 +13,8 @@ function CourseCreation() {
   ]);
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  const navigate = useNavigate();
+
 
   async function fetchData() {
     let courseList = await loadCourses();
@@ -75,8 +79,19 @@ function CourseCreation() {
       location: e.target.location.value,
       schedule: schedule,
     };
+    for (let i = 0; i < courses.length; i++) {
+        if (courses[i].code === courseData.code) {
+            alert("Course code already exists. Please use a different code.");
+            return;
+            }
+        }
+
     console.log("Submitting course:", courseData);
-    
+    addCourse(courseData);
+    setTimeout(() => {
+        navigate("/dashboard");
+        }, 1000);
+
   }
 
   return (

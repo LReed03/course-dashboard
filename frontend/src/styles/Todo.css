@@ -10,6 +10,7 @@
     margin-left: 10px;
     border-radius: 12px;
     border: 1.25px solid black;
+    text-align: center;
 }
 
 .todo button {
@@ -28,5 +29,6 @@
 }
 
 .todo select{
-    width: 75px;
+    width: 90px;
+    text-align: center;
 }
