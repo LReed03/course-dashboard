@@ -3,35 +3,148 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { loadCourses } from "../api/courseAPI";
 
-function CourseCreation(){
-    const [courses, setCourses] = useState([]);
-    const [highestId, setHighestId] = useState(0)
+function CourseCreation() {
+  const [courses, setCourses] = useState([]);
+  const [highestId, setHighestId] = useState(0);
+  const [schedule, setSchedule] = useState([
+    { days: [], startTime: "", endTime: "" },
+  ]);
 
-    async function fetchData() {
-        let courseList = await loadCourses();                 
-        setCourses(courseList);
-        let id = checkHighestID();
-        setHighestId(id);
-        }
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
-    useEffect(() => {
-        fetchData();
-      }, []);
+  async function fetchData() {
+    let courseList = await loadCourses();
+    setCourses(courseList);
+    let id = checkHighestID(courseList);
+    setHighestId(id);
+  }
 
-    function checkHighestID() {
-        if (courses.length === 0) {
-            return 0;
-        }
-        return Math.max(...courses.map(course => course.id));
-        }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
+  function checkHighestID(courseList) {
+    if (!courseList || courseList.length === 0) {
+      return 0;
+    }
+    return Math.max(...courseList.map((course) => course.id));
+  }
+
+  function handleDayChange(index, day) {
+    const updated = [...schedule];
+    const currentDays = updated[index].days;
+    if (currentDays.includes(day)) {
+      updated[index].days = currentDays.filter((d) => d !== day);
+    } else {
+      updated[index].days = [...currentDays, day];
+    }
+    setSchedule(updated);
+  }
+
+  function handleTimeChange(index, field, value) {
+    const updated = [...schedule];
+    updated[index][field] = value;
+    setSchedule(updated);
+  }
+
+  function handleAddSlot() {
+    setSchedule([...schedule, { days: [], startTime: "", endTime: "" }]);
+  }
+
+  function handleRemoveSlot(index) {
+    const updated = [...schedule];
+    updated.splice(index, 1);
+    setSchedule(updated);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const courseData = {
+      id: highestId + 1,
+      name: e.target.courseName.value,
+      code: e.target.courseCode.value,
+      professor: e.target.professorName.value,
+      location: e.target.location.value,
+      schedule: schedule,
+    };
+    console.log("Submitting course:", courseData);
     
-    return(
-        <div>
-            <Header/>
-            <Footer/>
-        </div>
-    )
+  }
+
+  return (
+    <div>
+      <Header />
+      <div className="container">
+        <h1>Add Course</h1>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="courseName">Course Name*</label>
+          <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" required />
+
+          <label htmlFor="courseCode">Course Code*</label>
+          <input type="text" id="courseCode" name="courseCode" placeholder="Enter Course Code" required />
+
+          <label htmlFor="professorName">Professor Name (Optional)</label>
+          <input type="text" id="professorName" name="professorName" placeholder="Enter Professor Name" />
+
+          <label htmlFor="location">Location (Optional)</label>
+          <input type="text" id="location" name="location" placeholder="Enter Location" />
+
+          <h3>Class Schedule</h3>
+          {schedule.map((slot, index) => (
+            <div key={index}>
+              <div>
+                <strong>Days:</strong>
+                {daysOfWeek.map((day) => (
+                  <label key={day}>
+                    <input
+                      type="checkbox"
+                      checked={slot.days.includes(day)}
+                      onChange={() => handleDayChange(index, day)}
+                    />
+                    {day}
+                  </label>
+                ))}
+              </div>
+
+              <div>
+                <label>
+                  Start Time:
+                  <input
+                    type="time"
+                    value={slot.startTime}
+                    onChange={(e) => handleTimeChange(index, "startTime", e.target.value)}
+                    required
+                  />
+                </label>
+
+                <label>
+                  End Time:
+                  <input
+                    type="time"
+                    value={slot.endTime}
+                    onChange={(e) => handleTimeChange(index, "endTime", e.target.value)}
+                    required
+                  />
+                </label>
+              </div>
+
+              {schedule.length > 1 && (
+                <button type="button" onClick={() => handleRemoveSlot(index)} style={{ marginTop: "8px" }}>
+                  Remove Time Slot
+                </button>
+              )}
+            </div>
+          ))}
+
+          <button type="button" onClick={handleAddSlot}>+ Add Time Slot</button>
+
+          <br /><br />
+          <button type="submit">Create Course</button>
+        </form>
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default CourseCreation;
