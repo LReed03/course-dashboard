@@ -7,7 +7,7 @@ function CourseCreation() {
   const [courses, setCourses] = useState([]);
   const [highestId, setHighestId] = useState(0);
   const [schedule, setSchedule] = useState([
-    { days: [], startTime: "", endTime: "" },
+    {type: "Lecture", days: [], startTime: "", endTime: "" },
   ]);
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -35,7 +35,8 @@ function CourseCreation() {
     const currentDays = updated[index].days;
     if (currentDays.includes(day)) {
       updated[index].days = currentDays.filter((d) => d !== day);
-    } else {
+    } 
+    else {
       updated[index].days = [...currentDays, day];
     }
     setSchedule(updated);
@@ -46,6 +47,13 @@ function CourseCreation() {
     updated[index][field] = value;
     setSchedule(updated);
   }
+
+  function handleTypeChange(index, value) {
+    const updated = [...schedule];
+    updated[index].type = value;
+    setSchedule(updated);
+    }
+
 
   function handleAddSlot() {
     setSchedule([...schedule, { days: [], startTime: "", endTime: "" }]);
@@ -92,6 +100,17 @@ function CourseCreation() {
           <h3>Class Schedule</h3>
           {schedule.map((slot, index) => (
             <div key={index}>
+                <label>
+                    Type:
+                    <select
+                    value={slot.type}
+                    onChange={(e) => handleTypeChange(index, e.target.value)}
+                    >
+                    <option value="Lecture">Lecture</option>
+                    <option value="Lab">Lab</option>
+                    <option value="Tutorial">Tutorial</option>
+                    </select>
+                </label>
               <div>
                 <strong>Days:</strong>
                 {daysOfWeek.map((day) => (
