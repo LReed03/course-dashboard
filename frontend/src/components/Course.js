@@ -11,7 +11,7 @@ function Course({ course, tasks}) {
             <h2>{course.name}</h2>
             <p>{course.code}</p>
             <p>Instructor: {course.professor}</p>
-            <p>Loction: {course.location}</p>
+            <p>Location: {course.location}</p>
             <div className="schedule">
                 <p>Schedule: {course.schedule[0].type}</p>
                 <p>{course.schedule[0].days}</p>
