@@ -40,7 +40,7 @@ function Dashboard() {
       <Header/>
       <div  className="dashboard-container">
         {renderCourses()}
-        <Link to="coursecreation"><button>Create Class</button></Link>
+        <Link to="coursecreation"><button>Add Class</button></Link>
       </div>
       <Footer/>
     </div>
