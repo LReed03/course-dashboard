@@ -8,7 +8,7 @@ function Todo() {
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
-  const [courseID, setCourseID] = useState(null);
+  const [courseID, setCourseID] = useState("");
 
   async function fetchData() {
     let taskList = await loadTasks();
@@ -58,8 +58,10 @@ function Todo() {
     <div className="todo-container">
       <Header />
       <div className="todo">
-        <select>{courses.map(course =>
-          <option key={course.id} value={course.id} onClick={() => setCourseID(course.id)}>
+        <select onChange={(e) => setCourseID(e.target.value)}>
+          <option value="">No Course:</option>
+          {courses.map(course =>
+          <option key={course.id} value={course.id}>
             {course.code}
           </option>
         )}</select>
