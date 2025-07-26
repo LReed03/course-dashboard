@@ -3,7 +3,7 @@
     justify-content: center;
     padding: 20px;
     background-color: black;
-    position: absolute;
-    width: 100%;
+    position: relative;
+    max-width: 100%;
     bottom: 0;
 }

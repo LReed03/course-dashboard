@@ -26,11 +26,11 @@ function Todo() {
     if (input.trim() === "") {
       return; 
     }
-
+/*
     if (courseID === null){
       return;
     } 
-  
+  */
     const newTask = {
       id: Date.now(),
       title: input,
@@ -55,7 +55,7 @@ function Todo() {
     </div>
   ));
   return (
-    <div>
+    <div className="todo-container">
       <Header />
       <div className="todo">
         <select>{courses.map(course =>

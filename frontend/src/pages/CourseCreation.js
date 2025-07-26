@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { loadCourses, addCourse } from "../api/courseAPI";
 import { useNavigate } from "react-router-dom";
+import "../styles/CourseCreation.css";
 
 
 function CourseCreation() {
@@ -95,11 +96,12 @@ function CourseCreation() {
   }
 
   return (
-    <div>
+    <div  className="course-creation-container">
       <Header />
       <div className="container">
         <h1>Add Course</h1>
         <form onSubmit={handleSubmit}>
+          <h3>Course Details</h3>
           <label htmlFor="courseName">Course Name*</label>
           <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" required />
 
@@ -126,18 +128,20 @@ function CourseCreation() {
                     <option value="Tutorial">Tutorial</option>
                     </select>
                 </label>
-              <div>
+              <div> 
                 <strong>Days:</strong>
-                {daysOfWeek.map((day) => (
-                  <label key={day}>
-                    <input
-                      type="checkbox"
-                      checked={slot.days.includes(day)}
-                      onChange={() => handleDayChange(index, day)}
-                    />
-                    {day}
-                  </label>
-                ))}
+                <div  className="days-container">
+                  {daysOfWeek.map((day) => (
+                    <label key={day}>
+                      <input
+                        type="checkbox"
+                        checked={slot.days.includes(day)}
+                        onChange={() => handleDayChange(index, day)}
+                      />
+                      {day}
+                    </label>
+                  ))}
+                </div>
               </div>
 
               <div>
@@ -147,7 +151,6 @@ function CourseCreation() {
                     type="time"
                     value={slot.startTime}
                     onChange={(e) => handleTimeChange(index, "startTime", e.target.value)}
-                    required
                   />
                 </label>
 
@@ -157,20 +160,19 @@ function CourseCreation() {
                     type="time"
                     value={slot.endTime}
                     onChange={(e) => handleTimeChange(index, "endTime", e.target.value)}
-                    required
                   />
                 </label>
               </div>
 
               {schedule.length > 1 && (
-                <button type="button" onClick={() => handleRemoveSlot(index)} style={{ marginTop: "8px" }}>
+                <button type="button" onClick={() => handleRemoveSlot(index)} className="small-button">
                   Remove Time Slot
                 </button>
               )}
             </div>
           ))}
 
-          <button type="button" onClick={handleAddSlot}>+ Add Time Slot</button>
+          <button type="button" onClick={handleAddSlot} className="small-button">+ Add Time Slot</button>
 
           <br /><br />
           <button type="submit">Create Course</button>
