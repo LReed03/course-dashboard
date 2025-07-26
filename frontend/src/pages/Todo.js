@@ -55,20 +55,22 @@ function Todo() {
     </div>
   ));
   return (
-    <div className="todo-container">
+    <div className="todo-page">
       <Header />
-      <div className="todo">
-        <select onChange={(e) => setCourseID(e.target.value)}>
-          <option value="">No Course:</option>
-          {courses.map(course =>
-          <option key={course.id} value={course.id}>
-            {course.code}
-          </option>
-        )}</select>
-        <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-        <button onClick={handleAdd}>Add Task</button>
+      <div className="todo-container">
+        <div className="todo">
+          <select onChange={(e) => setCourseID(e.target.value)}>
+            <option value="">No Course:</option>
+            {courses.map(course =>
+            <option key={course.id} value={course.id}>
+              {course.code}
+            </option>
+          )}</select>
+          <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
+          <button onClick={handleAdd}>Add Task</button>
+        </div>
+        <ul>{listTasks}</ul>
       </div>
-      <ul>{listTasks}</ul>
       <Footer/>
     </div>
   );

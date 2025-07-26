@@ -7,7 +7,7 @@ function Landing() {
   return (
     <div className="landing-page">
       <Header />
-      <div>
+      <div className="landing-container">
         <h1>Welcome to the Course Dashboard</h1>
         <p>Your one stop shop to help you keep you course organized.</p>
       </div>

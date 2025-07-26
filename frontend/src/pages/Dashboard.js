@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 import Course from "../components/Course";
 import { loadCourses } from "../api/courseAPI";
 import { loadTasks } from "../api/TodoAPI";
-
+import "../styles/Dashboard.css";
 
 function Dashboard() {
   const [courses, setCourses] = useState([]);
@@ -38,7 +38,7 @@ function Dashboard() {
   return (
     <div>
       <Header/>
-      <div>
+      <div  className="dashboard-container">
         {renderCourses()}
         <Link to="coursecreation"><button>Create Class</button></Link>
       </div>
