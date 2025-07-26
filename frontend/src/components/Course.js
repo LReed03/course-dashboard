@@ -12,9 +12,11 @@ function Course({ course, tasks}) {
             <p>{course.code}</p>
             <p>Instructor: {course.professor}</p>
             <p>Loction: {course.location}</p>
-            <p>Schedule: {course.schedule[0].type}</p>
-            <p>{course.schedule[0].days}</p>
-            <p>{course.schedule[0].startTime} - {course.schedule[0].endTime}</p>
+            <div className="schedule">
+                <p>Schedule: {course.schedule[0].type}</p>
+                <p>{course.schedule[0].days}</p>
+                <p>{course.schedule[0].startTime} - {course.schedule[0].endTime}</p>
+            </div>
             <h3>Tasks:</h3>
             {renderTasks().length > 0 ? (
             <ul>{renderTasks()}</ul>
