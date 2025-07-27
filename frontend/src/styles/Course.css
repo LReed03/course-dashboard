@@ -1,0 +1,75 @@
+.course {
+  background: linear-gradient(to bottom right, #fdfdfd, #f0f4ff);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.course:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+}
+
+.course h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.course p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.course .schedule {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.course h3 {
+  margin-top: 15px;
+  font-size: 1.2rem;
+}
+
+.course ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.course ul li {
+  font-weight: 500;
+  padding: 3px;
+}
+
+.schedule-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px; 
+  flex-wrap: wrap;
+  margin: 25px;
+  padding: 10px;
+}
+
+.schedule-block {
+  background-color: #f5f7fb;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  min-width: 120px;
+  max-width: 150px;
+  flex: 1;
+}
+
+.schedule-block h4 {
+  font-size: 1.1rem;
+}
+
+.schedule-block p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+}

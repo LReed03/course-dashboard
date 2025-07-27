@@ -40,8 +40,8 @@ function Dashboard() {
       <Header/>
       <div  className="dashboard-container">
         {renderCourses()}
-        <Link to="coursecreation"><button>Add Class</button></Link>
       </div>
+      <Link to="coursecreation"><button id="create-class-button">Add Class</button></Link>
       <Footer/>
     </div>
   );

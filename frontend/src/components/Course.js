@@ -1,9 +1,19 @@
 import React from "react";
+import "../styles/Course.css";
 
-function Course({ course, tasks}) {
+function Course({course, tasks}) {
     function renderTasks() {
         return tasks.filter(task => String(task.course) === String(course.id)).map(task => (
             <li key={task.id} className="task">{task.title}</li>
+        ));
+    }
+    function renderSchedule() {
+        return course.schedule.map(sched => (
+            <div className="schedule-block">
+                <strong><p>{sched.type}</p></strong>
+                <p>{sched.days.join(" ")}</p>
+                <p>{sched.startTime} - {sched.endTime}</p>
+            </div>
         ));
     }
     return (
@@ -13,9 +23,10 @@ function Course({ course, tasks}) {
             <p>Instructor: {course.professor}</p>
             <p>Location: {course.location}</p>
             <div className="schedule">
-                <p>Schedule: {course.schedule[0].type}</p>
-                <p>{course.schedule[0].days}</p>
-                <p>{course.schedule[0].startTime} - {course.schedule[0].endTime}</p>
+                <h3>Schedule:</h3>
+                <div className="schedule-container">
+                    {renderSchedule()}
+                </div>
             </div>
             <h3>Tasks:</h3>
             {renderTasks().length > 0 ? (

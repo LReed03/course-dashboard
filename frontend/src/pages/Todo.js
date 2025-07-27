@@ -38,8 +38,7 @@ function Todo() {
       course: courseID,
     };
     addTask(newTask);
-    setInput("");
-    setCourseID() 
+    setInput("")
     fetchData();
   }
 
