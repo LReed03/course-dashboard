@@ -1,10 +1,19 @@
 import React from "react";
 import "../styles/Course.css";
+import { deleteTask } from "../api/TodoAPI";
 
 function Course({course, tasks}) {
+    function removeTask(task) {
+      deleteTask(task);
+      }
+
+      
     function renderTasks() {
         return tasks.filter(task => String(task.course) === String(course.id)).map(task => (
-            <li key={task.id} className="task">{task.title}</li>
+            <div className="task-container">
+                <li key={task.id} className="task">{task.title}</li>
+                <button onClick={() => removeTask(task)}>✅</button>
+            </div>
         ));
     }
     function renderSchedule() {

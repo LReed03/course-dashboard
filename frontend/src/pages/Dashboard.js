@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Course from "../components/Course";
 import { loadCourses } from "../api/courseAPI";
-import { loadTasks } from "../api/TodoAPI";
+import { loadTasks} from "../api/TodoAPI";
 import "../styles/Dashboard.css";
 
 function Dashboard() {
   const [courses, setCourses] = useState([]);
   const [tasks, setTasks] = useState([]);
-  console.log(tasks);
-  console.log(courses);
 
   async function fetchData() {
     let taskList = await loadTasks();
@@ -23,7 +21,7 @@ function Dashboard() {
     
   useEffect(() => {
     fetchData();
-    }, []);
+    }, [tasks, courses]);
 
   function renderCourses() {
     if (!courses || courses.length === 0) {

@@ -88,3 +88,16 @@
 .course #remove-class:hover {
   background-color: #c0392b;
 }
+
+.task-container {
+  margin: 10px 0;
+  align-items: center;
+  display: inline-flex;
+}
+
+.task-container button{
+    color: white;
+    border: none;
+    cursor: pointer;
+    background-color: transparent
+}

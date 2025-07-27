@@ -9,7 +9,7 @@ function Landing() {
 
   return (
     <div className="landing">
-      <Header />
+      <Header/>
 
       <section className="hero">
         <h2>Your Personal Course Organizer</h2>
