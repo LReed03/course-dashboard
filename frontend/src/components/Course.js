@@ -34,6 +34,7 @@ function Course({course, tasks}) {
             ) : (
             <p>No tasks available for this course.</p>
             )}
+            <button id="remove-class">Remove Class</button>
         </div>
      );
 }
