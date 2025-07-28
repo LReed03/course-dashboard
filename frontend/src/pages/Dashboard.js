@@ -29,7 +29,7 @@ function Dashboard() {
     }
 
     return courses.map(course => (
-      <Course key={course.id} course={course} tasks={tasks} setTasks={setTasks}/>
+      <Course key={course.id} course={course} tasks={tasks} setTasks={setTasks} setCourses={setCourses}/>
     ));
   }
 
@@ -38,7 +38,7 @@ function Dashboard() {
       <Header/>
       <div  className="dashboard-page">
         <div  className="dashboard-container">
-          {renderCourses()}
+          {courses.length > 0 ? renderCourses() : <p className="no-courses">No courses available.</p>}
         </div>
         <Link to="coursecreation"><button id="create-class-button">Add Class</button></Link>
       </div>

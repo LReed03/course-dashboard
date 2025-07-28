@@ -4,13 +4,13 @@
 
 .dashboard-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
     gap: 35px;
     padding: 30px;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    }
-
+}
 #create-class-button {
     background-color: #4206a3;
     color: white;
@@ -25,4 +25,15 @@
 
 #create-class-button:hover {
     background-color: #32048a;
+}
+
+
+.no-courses {
+    text-align: center;
+    color: white;
+    font-size: 1.7rem;
+    margin-top: 60px;
+    margin-bottom: 80px;
+    font-weight: 700;
+    opacity: 0.85;
 }

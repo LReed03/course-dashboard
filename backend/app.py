@@ -41,6 +41,14 @@ def add_course():
         courses.append(course)
         return jsonify({"message": "Course added"}), 201
     return jsonify({"error": "No course provided"}), 400
+
+@app.route("/courses", methods=["DELETE"])
+def delete_course():
+    course = request.json
+    if course in courses:
+        courses.remove(course) 
+        return jsonify({"message": "Task removed"}), 201
+    return jsonify({"error": "No task provided"}), 400
         
 
 if __name__ == "__main__":

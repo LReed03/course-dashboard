@@ -1,11 +1,17 @@
 import React from "react";
 import "../styles/Course.css";
 import { deleteTask } from "../api/TodoAPI";
+import { deleteCourse } from "../api/courseAPI";
 
-function Course({course, tasks, setTasks}) {
+function Course({course, tasks, setTasks, setCourses}) {
     function removeTask(task) {
       deleteTask(task);
       setTasks(prev => prev.filter(t => t.id !== task.id));
+      }
+
+      function removeCourse(course){
+        deleteCourse(course);
+        setCourses(prev => prev.filter(c => c.id !== course.id));
       }
 
       
@@ -42,9 +48,9 @@ function Course({course, tasks, setTasks}) {
             {renderTasks().length > 0 ? (
             <ul>{renderTasks()}</ul>
             ) : (
-            <p>No tasks available for this course.</p>
+            <p className>No tasks available for this course.</p>
             )}
-            <button id="remove-class">Remove Class</button>
+            <button id="remove-class" onClick={() => removeCourse(course)}>Remove Class</button>
         </div>
      );
 }
