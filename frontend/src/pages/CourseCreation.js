@@ -116,20 +116,19 @@ function CourseCreation() {
 
           <h3>Class Schedule</h3>
           {schedule.map((slot, index) => (
-            <div key={index}>
-                <label>
-                    Type:
-                    <select
-                    value={slot.type}
-                    onChange={(e) => handleTypeChange(index, e.target.value)}
-                    >
-                    <option value="Lecture">Lecture</option>
-                    <option value="Lab">Lab</option>
-                    <option value="Tutorial">Tutorial</option>
-                    </select>
-                </label>
+              <div key={index} className="select-container">
+                <label htmlFor={`type-${index}`}>Type:</label>
+                <select
+                  id={`type-${index}`}
+                  value={slot.type}
+                  onChange={(e) => handleTypeChange(index, e.target.value)}
+                >
+                  <option value="Lecture">Lecture</option>
+                  <option value="Lab">Lab</option>
+                  <option value="Tutorial">Tutorial</option>
+                </select>
               <div> 
-                <strong>Days:</strong>
+                <label>Days:</label>
                 <div  className="days-container">
                   {daysOfWeek.map((day) => (
                     <label key={day}>
@@ -165,14 +164,14 @@ function CourseCreation() {
               </div>
 
               {schedule.length > 1 && (
-                <button type="button" onClick={() => handleRemoveSlot(index)} className="small-button">
+                <button type="button" onClick={() => handleRemoveSlot(index)} className="small-button-remove">
                   Remove Time Slot
                 </button>
               )}
             </div>
           ))}
 
-          <button type="button" onClick={handleAddSlot} className="small-button">+ Add Time Slot</button>
+          <button type="button" onClick={handleAddSlot} className="small-button-add">+ Add Time Slot</button>
 
           <br /><br />
           <button type="submit">Create Course</button>

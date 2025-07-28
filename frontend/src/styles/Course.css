@@ -1,16 +1,12 @@
 .course {
-  background: linear-gradient(to bottom right, #fdfdfd, #f0f4ff);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  background-color: #f0f4ff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.course:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-}
 
 .course h2 {
   font-size: 1.8rem;
@@ -20,18 +16,13 @@
 
 .course p {
   font-size: 1rem;
-  margin: 5px 0;
-}
-
-.course .schedule {
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 8px;
+  margin: 4px 0;
 }
 
 .course h3 {
   margin-top: 15px;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .course ul {
@@ -42,7 +33,12 @@
 
 .course ul li {
   font-weight: 500;
-  padding: 3px;
+  padding: 5px;
+  background-color: #ffffff;
+  margin: 6px auto;
+  max-width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
 }
 
 .schedule-container {
@@ -50,15 +46,15 @@
   justify-content: center;
   gap: 10px; 
   flex-wrap: wrap;
-  margin: 20px;
+  margin: 20px 0;
   padding: 10px;
 }
 
 .schedule-block {
-  background-color: #f5f7fb;
+  background-color: #eaf0ff;
   padding: 15px 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   text-align: center;
   min-width: 95px;
   max-width: 140px;
@@ -79,10 +75,11 @@
   color: white;
   padding: 10px 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 55px;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background-color 0.2s ease;
 }
 
 .course #remove-class:hover {
@@ -90,14 +87,46 @@
 }
 
 .task-container {
-  margin: 10px 0;
-  align-items: center;
-  display: inline-flex;
+  background-color: #f0f4ff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+  margin: 20px auto 30px;
+  max-width: 90%;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.task-container button{
-    color: white;
-    border: none;
-    cursor: pointer;
-    background-color: transparent
+/* Each task line */
+.task {
+  background-color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Checkbox styled as a button */
+.task input[type="checkbox"] {
+  appearance: none;
+  background-color: #2ecc71;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.task input[type="checkbox"]:hover {
+  background-color: #27ae60;
 }

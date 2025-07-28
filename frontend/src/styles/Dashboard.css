@@ -1,39 +1,47 @@
-.dashboard-page{
-    min-height: 100vh;
+.dashboard-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #e0ecff, #f8f9ff);
+  font-family: 'Segoe UI', sans-serif;
+  color: #111;
+  padding-top: 60px;
 }
 
 .dashboard-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    justify-content: center;
-    gap: 35px;
-    padding: 30px;
-    max-width: 1000px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  padding: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  justify-content: center;
 }
+
 #create-class-button {
-    background-color: #4206a3;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 20px auto;
-    display: block;
+  background-color: #4b6cb7;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 40px auto 20px;
+  display: block;
+  text-decoration: none;
 }
 
 #create-class-button:hover {
-    background-color: #32048a;
+  background-color: #3a56a0;
 }
 
 
 .no-courses {
-    text-align: center;
-    color: white;
-    font-size: 1.7rem;
-    margin-top: 60px;
-    margin-bottom: 80px;
-    font-weight: 700;
-    opacity: 0.85;
+  text-align: center;
+  color: #333;
+  font-size: 1.6rem;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }

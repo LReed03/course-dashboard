@@ -1,93 +1,88 @@
 .todo-container {
-    min-height: 100vh;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f7fa;
+  padding-top: 60px;
 }
 
-
-.todo{
-    display: flex;
-    justify-content: center;
-    margin-top: 35px;
+.todo {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 35px;
+  gap: 10px;
 }
 
 .todo input {
-    width: 300px;
-    padding: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
-    border-radius: 12px;
-    border: 1.25px solid black;
-    text-align: center;
+  width: 280px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1.25px solid #ccc;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.todo select {
+  width: 100px;
+  text-align: center;
+  border-radius: 12px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1.25px solid #ccc;
 }
 
 .todo button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 12px;
-    border: 1.25px solid black;
+  padding: 10px 20px;
+  background-color: #4b6cb7;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
 .todo button:hover {
-    background-color: #45a049;
+  background-color: #3a56a0;
 }
 
-.todo select{
-    width: 90px;
-    text-align: center;
-    border-radius: 12px;
+.todo-container ul {
+  background-color: white;
+  max-width: 400px;
+  margin: 45px auto;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
 }
 
-.todo-container ul{
-    background-color: white;
-    max-width: 350px;
-    margin: 45px auto;
-    border-radius: 12px;
-    padding: 15px;
+.list-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f4ff;
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.list-items{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 420px;
-    background-color: #ffffff;
-    padding: 18px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    font-family: 'Segoe UI', Roboto, sans-serif;
-    list-style-type: none;
-}
-
-.list-items:hover {
-    background-color: #f9f9f9e1;
-}
-
-.list-items p {
-    margin: 0;
-    font-size: 15px;
-    color: #222;
-    font-weight: 500;
-    word-break: break-word;
-}
 .list-items button {
-    background-color: #2ecc71;
-    color: #fff;
-    padding: 6px 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: background-color 0.25s ease, box-shadow 0.25s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .list-items button:hover {
-    background-color: #27ae60;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-    transform: scale(1.01);
+  background-color: #27ae60;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
 }

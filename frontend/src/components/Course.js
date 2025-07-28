@@ -16,13 +16,16 @@ function Course({course, tasks, setTasks, setCourses}) {
 
       
     function renderTasks() {
-        return tasks.filter(task => String(task.course) === String(course.id)).map(task => (
-            <div className="task-container">
-                <li key={task.id} className="task">{task.title}</li>
-                <button onClick={() => removeTask(task)}>✅</button>
-            </div>
-        ));
-    }
+        return tasks
+            .filter((task) => String(task.course) === String(course.id))
+            .map((task) => (
+            <li key={task.id} className="task">
+                {task.title}
+                <input type="checkbox" checked={task.completed} onChange={() => removeTask(task)} />
+            </li>
+            ));
+        }
+
     function renderSchedule() {
         return course.schedule.map(sched => (
             <div className="schedule-block">
@@ -45,11 +48,12 @@ function Course({course, tasks, setTasks, setCourses}) {
                 </div>
             </div>
             <h3>Tasks:</h3>
-            {renderTasks().length > 0 ? (
-            <ul>{renderTasks()}</ul>
-            ) : (
-            <p className>No tasks available for this course.</p>
-            )}
+        {renderTasks().length > 0 ? (
+        <div className="task-container">{renderTasks()}</div>
+        ) : (
+        <p className="no-course">No tasks available for this course.</p>
+        )}
+
             <button id="remove-class" onClick={() => removeCourse(course)}>Remove Class</button>
         </div>
      );
