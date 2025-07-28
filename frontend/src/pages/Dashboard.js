@@ -21,7 +21,7 @@ function Dashboard() {
     
   useEffect(() => {
     fetchData();
-    }, [tasks, courses]);
+    }, []);
 
   function renderCourses() {
     if (!courses || courses.length === 0) {
@@ -29,17 +29,19 @@ function Dashboard() {
     }
 
     return courses.map(course => (
-      <Course key={course.id} course={course} tasks={tasks} />
+      <Course key={course.id} course={course} tasks={tasks} setTasks={setTasks}/>
     ));
   }
 
   return (
     <div>
       <Header/>
-      <div  className="dashboard-container">
-        {renderCourses()}
+      <div  className="dashboard-page">
+        <div  className="dashboard-container">
+          {renderCourses()}
+        </div>
+        <Link to="coursecreation"><button id="create-class-button">Add Class</button></Link>
       </div>
-      <Link to="coursecreation"><button id="create-class-button">Add Class</button></Link>
       <Footer/>
     </div>
   );

@@ -2,9 +2,10 @@ import React from "react";
 import "../styles/Course.css";
 import { deleteTask } from "../api/TodoAPI";
 
-function Course({course, tasks}) {
+function Course({course, tasks, setTasks}) {
     function removeTask(task) {
       deleteTask(task);
+      setTasks(prev => prev.filter(t => t.id !== task.id));
       }
 
       

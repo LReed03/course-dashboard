@@ -1,5 +1,8 @@
-.dashboard-container {
+.dashboard-page{
     min-height: 100vh;
+}
+
+.dashboard-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 35px;
