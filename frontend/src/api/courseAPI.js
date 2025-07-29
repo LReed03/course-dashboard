@@ -49,3 +49,7 @@ export async function deleteCourse(course) {
         console.error("Error loading tasks:", error);
     }
 }
+
+export async function editCourse(course){
+    
+}
