@@ -8,17 +8,19 @@ import { useParams } from "react-router-dom";
 
 
 function CourseEditor() {
+    const [schedule, setSchedule] = useState([
+        {type: "Lecture", days: [], startTime: "", endTime: "" },
+    ]);
+
     const [course, setCourse] = useState({
         name: "",
         code: "",
         professor: "",
-        location: ""
+        location: "",
+        schedule: []
     });
 
     const [courses, setCourses] = useState([]);
-    const [schedule, setSchedule] = useState([
-        {type: "Lecture", days: [], startTime: "", endTime: "" },
-    ]);
 
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
     const navigate = useNavigate();
@@ -75,6 +77,14 @@ function CourseEditor() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    const courseData = {
+      id: course.id,
+      name: course.name,
+      code: course.code,
+      professor: course.professor,
+      location: course.location,
+      schedule: schedule,
+    };
     
     for (let i = 0; i < courses.length; i++) {
         if (id != course.id && courses[i].code === course.code) {
@@ -84,7 +94,7 @@ function CourseEditor() {
         }
 
     console.log("Submitting course:", course);
-    editCourse(course);
+    editCourse(courseData);
     setTimeout(() => {
         navigate("/dashboard");
         }, 1000);
@@ -169,7 +179,7 @@ function CourseEditor() {
           <button type="button" onClick={handleAddSlot} className="small-button-add">+ Add Time Slot</button>
 
           <br /><br />
-          <button type="submit">Edit Course</button>
+          <button type="submit">Save Course</button>
         </form>
       </div>
       <Footer />
