@@ -40,7 +40,7 @@ function Dashboard() {
         <div  className="dashboard-container">
           {courses.length > 0 ? renderCourses() : <p className="no-courses">No courses available.</p>}
         </div>
-        <Link to="coursecreation"><button id="create-class-button">Add Class</button></Link>
+        <Link to="coursecreation" id="create-class-button">Add Class</Link>
       </div>
       <Footer/>
     </div>

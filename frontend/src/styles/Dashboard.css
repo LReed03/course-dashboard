@@ -17,19 +17,19 @@
 }
 
 #create-class-button {
+  display: block;
+  width: fit-content;
+  margin: 40px auto 20px; 
+  padding: 14px 28px;
   background-color: #4b6cb7;
   color: white;
-  padding: 14px 28px;
-  border: none;
   border-radius: 10px;
-  font-size: 1rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  margin: 40px auto 20px;
-  display: block;
+  text-align: center;
   text-decoration: none;
 }
+
+
 
 #create-class-button:hover {
   background-color: #3a56a0;

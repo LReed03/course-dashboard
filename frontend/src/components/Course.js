@@ -55,8 +55,10 @@ function Course({course, tasks, setTasks, setCourses}) {
         ) : (
         <p className="no-course">No tasks available for this course.</p>
         )}
-            <button id="edit-class" onClick={() => navigate(`/edit-course/${course.id}`)}>Edit</button>
-            <button id="remove-class" onClick={() => removeCourse(course)}>Remove Class</button>
+            <div className="buttons"> 
+                <button id="edit-class" onClick={() => navigate(`/edit-course/${course.id}`)}>Edit</button>
+                <button id="remove-class" onClick={() => removeCourse(course)}>Remove Class</button>
+            </div>
         </div>
      );
 }

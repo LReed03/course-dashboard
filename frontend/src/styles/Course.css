@@ -86,6 +86,22 @@
   background-color: #c0392b;
 }
 
+.course #edit-class{
+  background-color: #4A90E2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.course #edit-class:hover {
+  background-color: #357ABD;
+}
+
 .task-container {
   background-color: #f0f4ff;
   padding: 20px;
@@ -99,7 +115,7 @@
   gap: 10px;
 }
 
-/* Each task line */
+
 .task {
   background-color: white;
   padding: 12px 16px;
@@ -113,7 +129,6 @@
   align-items: center;
 }
 
-/* Checkbox styled as a button */
 .task input[type="checkbox"] {
   appearance: none;
   background-color: #2ecc71;
@@ -129,4 +144,12 @@
 
 .task input[type="checkbox"]:hover {
   background-color: #27ae60;
+}
+
+.buttons{
+  display: flex;
+  margin: auto;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
