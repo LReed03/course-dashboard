@@ -8,7 +8,13 @@ import { useParams } from "react-router-dom";
 
 
 function CourseEditor() {
-    const [course, setCourse] = useState("");
+    const [course, setCourse] = useState({
+        name: "",
+        code: "",
+        professor: "",
+        location: ""
+    });
+
     const [courses, setCourses] = useState([]);
     const [schedule, setSchedule] = useState([
         {type: "Lecture", days: [], startTime: "", endTime: "" },
@@ -100,16 +106,16 @@ function CourseEditor() {
         <form onSubmit={handleSubmit}>
           <h3>Course Details</h3>
           <label htmlFor="courseName">Course Name*</label>
-          <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" value={course.name} required />
+          <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" value={course.name} onChange={(e) => setCourse({ ...course, name: e.target.value })} required />
 
           <label htmlFor="courseCode">Course Code*</label>
-          <input type="text" id="courseCode" name="courseCode" placeholder="Enter Course Code" value={course.code} required />
+          <input type="text" id="courseCode" name="courseCode" placeholder="Enter Course Code" value={course.code} onChange={(e) => setCourse({ ...course, code: e.target.value })} required />
 
           <label htmlFor="professorName">Professor Name (Optional)</label>
-          <input type="text" id="professorName" name="professorName" placeholder="Enter Professor Name" value={course.professor}/>
+          <input type="text" id="professorName" name="professorName" placeholder="Enter Professor Name" value={course.professor} onChange={(e) => setCourse({ ...course, professor: e.target.value })}/>
 
           <label htmlFor="location">Location (Optional)</label>
-          <input type="text" id="location" name="location" placeholder="Enter Location" value={course.location}/>
+          <input type="text" id="location" name="location" placeholder="Enter Location" value={course.location} onChange={(e) => setCourse({ ...course, location: e.target.value })}/>
 
           <h3>Class Schedule</h3>
           {schedule.map((slot, index) => (
