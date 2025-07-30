@@ -75,28 +75,20 @@ function CourseEditor() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const courseData = {
-      id: id,
-      name: e.target.courseName.value,
-      code: e.target.courseCode.value,
-      professor: e.target.professorName.value,
-      location: e.target.location.value,
-      schedule: schedule,
-    };
+    
     for (let i = 0; i < courses.length; i++) {
-        if (id != course.id && courses[i].code === courseData.code) {
+        if (id != course.id && courses[i].code === course.code) {
             alert("Course code already exists. Please use a different code.");
             return;
             }
         }
 
-    console.log("Submitting course:", courseData);
-    editCourse(courseData);
+    console.log("Submitting course:", course);
+    editCourse(course);
     setTimeout(() => {
         navigate("/dashboard");
         }, 1000);
-
-  }
+    }
 
   return (
     <div  className="course-creation-container">

@@ -6,7 +6,7 @@ function Schedule() {
   return (
     <div>
       <Header />
-      <div>
+      <div className="schedule-page">
 
       </div>
       <Footer/>

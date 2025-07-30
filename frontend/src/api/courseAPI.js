@@ -51,5 +51,10 @@ export async function deleteCourse(course) {
 }
 
 export async function editCourse(course){
-    
+    const backendEndpoint = `http://localhost:5000/courses/${course.id}`;
+    await fetch(backendEndpoint, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(course)
+  });
 }

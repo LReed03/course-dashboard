@@ -49,6 +49,23 @@ def delete_course():
         courses.remove(course) 
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
+
+@app.route("/courses/<int:course_id>", methods=["PUT"])
+def update_course(course_id):
+    data = request.json
+
+    course = next((c for c in courses if c["id"] == course_id), None)
+    if not course:
+        return {"error": "Course not found"}, 404
+
+    course["name"] = data.get("name", course["name"])
+    course["code"] = data.get("code", course["code"])
+    course["professor"] = data.get("professor", course["professor"])
+    course["location"] = data.get("location", course["location"])
+    course["schedule"] = data.get("schedule", course["schedule"])
+
+    return {"message": "Course updated", "course": course}, 200
+
         
 
 if __name__ == "__main__":
