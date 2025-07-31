@@ -5,6 +5,7 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';  
 import Schedule from './pages/Schedule';
 import CourseCreation from './pages/CourseCreation';
+import CourseEditor from './pages/CourseEditor';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/todo" element={<Todo/>} />
           <Route path="/schedule" element={<Schedule/>} />
           <Route path="/dashboard/coursecreation" element={<CourseCreation/>} />
+          <Route path="/edit-course/:id" element={<CourseEditor />} />
         </Routes>
       </BrowserRouter>
     </div>

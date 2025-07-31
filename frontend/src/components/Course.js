@@ -1,21 +1,33 @@
 import React from "react";
 import "../styles/Course.css";
 import { deleteTask } from "../api/TodoAPI";
+import { deleteCourse } from "../api/courseAPI";
+import { useNavigate } from "react-router-dom";
 
-function Course({course, tasks}) {
+function Course({course, tasks, setTasks, setCourses}) {
+    const navigate = useNavigate();
     function removeTask(task) {
       deleteTask(task);
+      setTasks(prev => prev.filter(t => t.id !== task.id));
+      }
+
+      function removeCourse(course){
+        deleteCourse(course);
+        setCourses(prev => prev.filter(c => c.id !== course.id));
       }
 
       
     function renderTasks() {
-        return tasks.filter(task => String(task.course) === String(course.id)).map(task => (
-            <div className="task-container">
-                <li key={task.id} className="task">{task.title}</li>
-                <button onClick={() => removeTask(task)}>✅</button>
-            </div>
-        ));
-    }
+        return tasks
+            .filter((task) => String(task.course) === String(course.id))
+            .map((task) => (
+            <li key={task.id} className="task">
+                {task.title}
+                <input type="checkbox" checked={task.completed} onChange={() => removeTask(task)} />
+            </li>
+            ));
+        }
+
     function renderSchedule() {
         return course.schedule.map(sched => (
             <div className="schedule-block">
@@ -38,12 +50,15 @@ function Course({course, tasks}) {
                 </div>
             </div>
             <h3>Tasks:</h3>
-            {renderTasks().length > 0 ? (
-            <ul>{renderTasks()}</ul>
-            ) : (
-            <p>No tasks available for this course.</p>
-            )}
-            <button id="remove-class">Remove Class</button>
+        {renderTasks().length > 0 ? (
+        <div className="task-container">{renderTasks()}</div>
+        ) : (
+        <p className="no-course">No tasks available for this course.</p>
+        )}
+            <div className="buttons"> 
+                <button id="edit-class" onClick={() => navigate(`/edit-course/${course.id}`)}>Edit</button>
+                <button id="remove-class" onClick={() => removeCourse(course)}>Remove Class</button>
+            </div>
         </div>
      );
 }

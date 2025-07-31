@@ -1,39 +1,44 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { loadCourses, addCourse } from "../api/courseAPI";
+import { loadCourses,  editCourse } from "../api/courseAPI";
 import { useNavigate } from "react-router-dom";
 import "../styles/CourseCreation.css";
+import { useParams } from "react-router-dom";
 
 
-function CourseCreation() {
-  const [courses, setCourses] = useState([]);
-  const [highestId, setHighestId] = useState(0);
-  const [schedule, setSchedule] = useState([
-    {type: "Lecture", days: [], startTime: "", endTime: "" },
-  ]);
+function CourseEditor() {
+    const [schedule, setSchedule] = useState([
+        {type: "Lecture", days: [], startTime: "", endTime: "" },
+    ]);
 
-  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  const navigate = useNavigate();
+    const [course, setCourse] = useState({
+        name: "",
+        code: "",
+        professor: "",
+        location: "",
+        schedule: []
+    });
+
+    const [courses, setCourses] = useState([]);
+
+    const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+    const navigate = useNavigate();
+    const { id } = useParams();
 
 
-  async function fetchData() {
-    let courseList = await loadCourses();
-    setCourses(courseList);
-    let id = checkHighestID(courseList);
-    setHighestId(id);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  function checkHighestID(courseList) {
-    if (!courseList || courseList.length === 0) {
-      return 0;
-    }
-    return Math.max(...courseList.map((course) => course.id));
-  }
+    useEffect(() => {
+        async function fetchData() {
+        const allCourses = await loadCourses();
+        setCourses(allCourses);
+        const match = allCourses.find(c => String(c.id) === id);
+        if (match) {
+            setCourse(match);
+            setSchedule(match.schedule);
+        }
+        }
+        fetchData();
+    }, [id]);
 
   function handleDayChange(index, day) {
     const updated = [...schedule];
@@ -73,46 +78,46 @@ function CourseCreation() {
   function handleSubmit(e) {
     e.preventDefault();
     const courseData = {
-      id: highestId + 1,
-      name: e.target.courseName.value,
-      code: e.target.courseCode.value,
-      professor: e.target.professorName.value,
-      location: e.target.location.value,
+      id: course.id,
+      name: course.name,
+      code: course.code,
+      professor: course.professor,
+      location: course.location,
       schedule: schedule,
     };
+    
     for (let i = 0; i < courses.length; i++) {
-        if (courses[i].code === courseData.code) {
+        if (id != course.id && courses[i].code === course.code) {
             alert("Course code already exists. Please use a different code.");
             return;
             }
         }
 
-    console.log("Submitting course:", courseData);
-    addCourse(courseData);
+    console.log("Submitting course:", course);
+    editCourse(courseData);
     setTimeout(() => {
         navigate("/dashboard");
         }, 1000);
-
-  }
+    }
 
   return (
     <div  className="course-creation-container">
       <Header />
       <div className="container">
-        <h1>Add Course</h1>
+        <h1>Edit Course</h1>
         <form onSubmit={handleSubmit}>
           <h3>Course Details</h3>
           <label htmlFor="courseName">Course Name*</label>
-          <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" required />
+          <input type="text" id="courseName" name="courseName" placeholder="Enter Course Name" value={course.name} onChange={(e) => setCourse({ ...course, name: e.target.value })} required />
 
           <label htmlFor="courseCode">Course Code*</label>
-          <input type="text" id="courseCode" name="courseCode" placeholder="Enter Course Code" required />
+          <input type="text" id="courseCode" name="courseCode" placeholder="Enter Course Code" value={course.code} onChange={(e) => setCourse({ ...course, code: e.target.value })} required />
 
           <label htmlFor="professorName">Professor Name (Optional)</label>
-          <input type="text" id="professorName" name="professorName" placeholder="Enter Professor Name" />
+          <input type="text" id="professorName" name="professorName" placeholder="Enter Professor Name" value={course.professor} onChange={(e) => setCourse({ ...course, professor: e.target.value })}/>
 
           <label htmlFor="location">Location (Optional)</label>
-          <input type="text" id="location" name="location" placeholder="Enter Location" />
+          <input type="text" id="location" name="location" placeholder="Enter Location" value={course.location} onChange={(e) => setCourse({ ...course, location: e.target.value })}/>
 
           <h3>Class Schedule</h3>
           {schedule.map((slot, index) => (
@@ -174,7 +179,7 @@ function CourseCreation() {
           <button type="button" onClick={handleAddSlot} className="small-button-add">+ Add Time Slot</button>
 
           <br /><br />
-          <button type="submit">Create Course</button>
+          <button type="submit">Save Course</button>
         </form>
       </div>
       <Footer />
@@ -182,4 +187,4 @@ function CourseCreation() {
   );
 }
 
-export default CourseCreation;
+export default CourseEditor;

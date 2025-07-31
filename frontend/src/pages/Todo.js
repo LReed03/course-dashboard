@@ -49,7 +49,7 @@ function Todo() {
 
 
   const listTasks = tasks.map((task) => (
-    <div>
+    <div className="list-items">
       <li key={task.id}>{task.title}</li><button onClick={() => removeTask(task)}>Complete</button>
     </div>
   ));
@@ -68,7 +68,8 @@ function Todo() {
           <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
           <button onClick={handleAdd}>Add Task</button>
         </div>
-        <ul>{listTasks}</ul>
+        {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}
+        
       </div>
       <Footer/>
     </div>
