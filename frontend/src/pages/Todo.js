@@ -65,7 +65,7 @@ function Todo() {
       <div className="todo-container">
         <div className="todo">
           <select onChange={(e) => setCourseID(e.target.value)}>
-            <option value="">No Course:</option>
+            <option value="">No Course</option>
             {courses.map(course =>
             <option key={course.id} value={course.id}>
               {course.code}
