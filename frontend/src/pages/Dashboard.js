@@ -21,7 +21,7 @@ function Dashboard() {
     
   useEffect(() => {
     fetchData();
-    }, [tasks, courses]);
+    }, []);
 
   function renderCourses() {
     if (!courses || courses.length === 0) {
