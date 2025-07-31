@@ -21,10 +21,13 @@ function Course({course, tasks, setTasks, setCourses}) {
         return tasks
             .filter((task) => String(task.course) === String(course.id))
             .map((task) => (
-            <li key={task.id} className="task">
-                {task.title}
-                <input type="checkbox" checked={task.completed} onChange={() => removeTask(task)} />
-            </li>
+                <div className="list-items" key={task.id}>
+                    <div className="task-text">
+                        <li>{task.title}</li>
+                        <p id="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
+                    </div>
+                    <button onClick={() => removeTask(task)}>Complete</button>
+                </div>
             ));
         }
 

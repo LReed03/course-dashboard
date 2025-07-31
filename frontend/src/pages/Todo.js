@@ -10,7 +10,6 @@ function Todo() {
   const [input, setInput] = useState("");
   const [courseID, setCourseID] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [cutDate, setCutDate] = useState("");
 
   async function fetchData() {
     let taskList = await loadTasks();
