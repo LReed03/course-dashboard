@@ -10,6 +10,7 @@ function Todo() {
   const [input, setInput] = useState("");
   const [courseID, setCourseID] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [cutDate, setCutDate] = useState("");
 
   async function fetchData() {
     let taskList = await loadTasks();
@@ -50,11 +51,15 @@ function Todo() {
 
 
   const listTasks = tasks.map((task) => (
-    <div className="list-items">
-      <li key={task.id}>{task.title}</li><button onClick={() => removeTask(task)}>Complete</button>
-      <p>{task.dueDate}</p>
+    <div className="list-items" key={task.id}>
+      <div className="task-text">
+        <li>{task.title}</li>
+        <p className="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
+      </div>
+      <button onClick={() => removeTask(task)}>Complete</button>
     </div>
   ));
+
   return (
     <div className="todo-page">
       <Header />
