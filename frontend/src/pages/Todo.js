@@ -9,6 +9,7 @@ function Todo() {
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
   const [courseID, setCourseID] = useState("");
+  const [dueDate, setDueDate] = useState("");
 
   async function fetchData() {
     let taskList = await loadTasks();
@@ -34,8 +35,8 @@ function Todo() {
     const newTask = {
       id: Date.now(),
       title: input,
-      completed: false,
       course: courseID,
+      dueDate: dueDate
     };
     addTask(newTask);
     setInput("")
@@ -51,6 +52,7 @@ function Todo() {
   const listTasks = tasks.map((task) => (
     <div className="list-items">
       <li key={task.id}>{task.title}</li><button onClick={() => removeTask(task)}>Complete</button>
+      <p>{task.dueDate}</p>
     </div>
   ));
   return (
@@ -66,6 +68,7 @@ function Todo() {
             </option>
           )}</select>
           <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
+          <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
           <button onClick={handleAdd}>Add Task</button>
         </div>
         {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}
