@@ -39,6 +39,7 @@ function Todo() {
       dueDate: dueDate
     };
     addTask(newTask);
+    console.log("New Task Added:", newTask);
     setInput("")
     fetchData();
   }
@@ -54,8 +55,14 @@ function Todo() {
       <div className="task-text">
         <li>{task.title}</li>
         <p className="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
+        <p className="course-name">
+          {courses.find(course => course.id === Number(task.course))?.name || "No Course"}
+        </p>
       </div>
-      <button onClick={() => removeTask(task)}>Complete</button>
+      <div className="task-buttons">
+        <button onClick={() => removeTask(task)}>Complete</button>
+        <a className="edit-link">Edit</a>
+      </div>
     </div>
   ));
 
