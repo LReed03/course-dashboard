@@ -42,11 +42,7 @@ function TaskEditor() {
         if (input.trim() === "") {
           return; 
         }
-    /*
-        if (courseID === null){
-          return;
-        } 
-      */
+
         const newTask = {
           id: task.id,
           title: input,
