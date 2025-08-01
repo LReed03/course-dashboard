@@ -105,13 +105,14 @@
   list-style-type: disc;
   margin-left: 20px;
   font-weight: 600;
+  margin-bottom: -9px;
 }
 
 .due-date, .course-name {
   font-size: 12px;
   color: #666;
   margin-left: 20px;
-  margin-top: 4px;
+  margin-top: -10px;
 }
 
 .task-buttons {

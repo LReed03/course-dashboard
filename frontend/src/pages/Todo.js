@@ -53,11 +53,11 @@ function Todo() {
   const listTasks = tasks.map((task) => (
     <div className="list-items" key={task.id}>
       <div className="task-text">
-        <li>{task.title}</li>
-        <p className="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
+        <li>{task.title}</li>'
         <p className="course-name">
           {courses.find(course => course.id === Number(task.course))?.name || "No Course"}
         </p>
+        <p className="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
       </div>
       <div className="task-buttons">
         <button onClick={() => removeTask(task)}>Complete</button>
