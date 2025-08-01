@@ -24,6 +24,7 @@ function CourseEditor() {
 
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
     const navigate = useNavigate();
+    const cleanedSchedule = schedule.filter(slot => Array.isArray(slot.days) && slot.days.length > 0);
     const { id } = useParams();
 
 
@@ -83,7 +84,7 @@ function CourseEditor() {
       code: course.code,
       professor: course.professor,
       location: course.location,
-      schedule: schedule,
+      schedule: cleanedSchedule,
     };
     
     for (let i = 0; i < courses.length; i++) {

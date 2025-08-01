@@ -15,6 +15,8 @@ function CourseCreation() {
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const navigate = useNavigate();
+  const cleanedSchedule = schedule.filter(slot => Array.isArray(slot.days) && slot.days.length > 0);
+
 
 
   async function fetchData() {
@@ -78,7 +80,7 @@ function CourseCreation() {
       code: e.target.courseCode.value,
       professor: e.target.professorName.value,
       location: e.target.location.value,
-      schedule: schedule,
+      schedule: cleanedSchedule,
     };
     for (let i = 0; i < courses.length; i++) {
         if (courses[i].code === courseData.code) {
@@ -163,7 +165,7 @@ function CourseCreation() {
                 </label>
               </div>
 
-              {schedule.length > 1 && (
+              {schedule.length > 0 && (
                 <button type="button" onClick={() => handleRemoveSlot(index)} className="small-button-remove">
                   Remove Time Slot
                 </button>

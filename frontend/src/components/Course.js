@@ -49,7 +49,11 @@ function Course({course, tasks, setTasks, setCourses}) {
             <div className="schedule">
                 <h3>Schedule:</h3>
                 <div className="schedule-container">
-                    {renderSchedule()}
+                    {renderSchedule().length > 0 ? (
+                        renderSchedule()
+                    ) : (
+                        <p className="no-course">No schedule available for this course.</p>
+                    )}
                 </div>
             </div>
             <h3>Tasks:</h3>
