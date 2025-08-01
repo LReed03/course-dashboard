@@ -22,7 +22,7 @@ function Course({course, tasks, setTasks, setCourses}) {
             .filter((task) => String(task.course) === String(course.id))
             .map((task) => (
                 <div className="list-items" key={task.id}>
-                    <div className="task-text">
+                    <div className="course-task-text">
                         <li>{task.title}</li>
                         <p id="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
                     </div>

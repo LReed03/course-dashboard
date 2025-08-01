@@ -61,7 +61,7 @@ function Todo() {
       </div>
       <div className="task-buttons">
         <button onClick={() => removeTask(task)}>Complete</button>
-        <a className="edit-link">Edit</a>
+        <a className="edit-link" href={`/edit-task/${task.id}`}>Edit</a>
       </div>
     </div>
   ));

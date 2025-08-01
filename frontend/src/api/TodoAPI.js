@@ -33,7 +33,7 @@ export async function loadTasks() {
     }
 }
 
-export function updateTask() {
+export async function editTask(task) {
 
 }
 

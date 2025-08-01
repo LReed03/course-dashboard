@@ -139,20 +139,21 @@
   gap: 10px;
 }
 
-.task-text {
+.course-task-text {
   display: flex;
   flex-direction: column;
 }
 
-.task-text li {
+.course-task-text li {
   list-style-type:circle;
   margin-left: 10px;
   font-weight: 600;
+  margin-left: 20px;
 }
 
 #due-date{
   font-size: 12px;
   color: #666;
-  margin-left: 20px;
+  margin-left: 10px;
   margin-top: 4px;
 }
