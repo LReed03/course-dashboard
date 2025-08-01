@@ -23,17 +23,17 @@ function Landing() {
         <h2>Everything You Need, All in One Place</h2>
         <div className="feature-grid">
           <div className="feature-card">
-            <img src="/icons/calendar.svg" alt="Schedule Icon" />
+            <p>📅</p>
             <h3>Course Scheduler</h3>
             <p>Map out lectures, labs, and tutorials with an intuitive visual planner.</p>
           </div>
           <div className="feature-card">
-            <img src="/icons/list.svg" alt="To-do Icon" />
+            <p>📝</p>
             <h3>Task Tracker</h3>
             <p>Stay on top of assignments, quizzes, and submissions organized by course.</p>
           </div>
           <div className="feature-card">
-            <img src="/icons/bell.svg" alt="Reminder Icon" />
+            <p>🔔</p>
             <h3>Deadline Alerts</h3>
             <p>Never miss a due date with automated reminders and smart scheduling tools.</p>
           </div>
