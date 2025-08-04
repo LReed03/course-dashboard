@@ -7,6 +7,9 @@ import Schedule from './pages/Schedule';
 import CourseCreation from './pages/CourseCreation';
 import CourseEditor from './pages/CourseEditor';
 import TaskEditor from './pages/TaskEditor';
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+
 
 
 function App() {
