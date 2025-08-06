@@ -28,6 +28,18 @@ def delete_task():
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 
+@app.route("/tasks/<int:task_id>", methods=["PUT"])
+def update_task(task_id):
+    data = request.json
+    task = next((t for t in tasks if t["id"] == task_id), None)
+    if not task:
+        return {"error": "Task not found"}, 404
+    task["title"] = data.get("title", task["title"])
+    task["dueDate"] = data.get("dueDate", task["dueDate"])
+    task["courseID"] = data.get("courseID", task["courseID"])
+    return {"message": "Task updated", "task": task}, 200   
+
+
 "Course APIs"
 
 @app.route("/courses", methods=["GET"])

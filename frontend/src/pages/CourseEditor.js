@@ -180,7 +180,7 @@ function CourseEditor() {
           <button type="button" onClick={handleAddSlot} className="small-button-add">+ Add Time Slot</button>
 
           <br /><br />
-          <button type="submit">Save Course</button>
+          <button type="submit">Save Changes</button>
         </form>
       </div>
       <Footer />

@@ -34,7 +34,17 @@ export async function loadTasks() {
 }
 
 export async function editTask(task) {
-
+    const backendEndpoint = `http://localhost:5000/tasks/${task.id}`;
+    try{
+        await fetch(backendEndpoint, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(task)
+        });
+    }
+    catch (error) {
+        console.error("Error editing task:", error);
+    }
 }
 
 
