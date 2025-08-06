@@ -81,7 +81,7 @@ function TaskEditor() {
                     </option>
                 )}</select>
                 <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-                <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+                <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59"/>
                 <button onClick={handleEdit}>Save Changes</button>
                 </div>
             </div>

@@ -85,7 +85,7 @@ function Todo() {
             </option>
           )}</select>
           <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-          <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+          <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59"/>
           <button onClick={handleAdd}>Add Task</button>
         </div>
         {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}
