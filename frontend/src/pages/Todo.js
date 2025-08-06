@@ -27,17 +27,15 @@ function Todo() {
     if (input.trim() === "") {
       return; 
     }
-/*
-    if (courseID === null){
-      return;
-    } 
-  */
     const newTask = {
       id: Date.now(),
       title: input,
       course: courseID,
       dueDate: dueDate
     };
+    if(!verifyDate(newTask)){
+      return; // If date verification fails, do not add the task
+    }
     addTask(newTask);
     console.log("New Task Added:", newTask);
     setInput("")
@@ -47,6 +45,14 @@ function Todo() {
   function removeTask(task) {
     deleteTask(task);
     fetchData();
+  }
+
+  function verifyDate(task){
+    if(task.dueDate && new Date(task.dueDate.substring(0, 10)) < new Date()){
+      alert("Due date cannot be in the past.");
+      return false;
+    }
+    return true;
   }
 
 
