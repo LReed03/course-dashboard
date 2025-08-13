@@ -5,7 +5,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import { loadCourses } from "../api/courseAPI";
 import { loadTasks} from "../api/TodoAPI";
 
-function BigCalendar(props){
+function CalendarComponent(props){
     const localizer = momentLocalizer(moment);
     const [tasks, setTasks] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -22,10 +22,8 @@ function BigCalendar(props){
         }, []);
 
     return(
-        <div style={{ height: "90vh"}}>
-            <Calendar {...props} localizer={localizer} events={[]} />
-        </div>
+        <Calendar localizer={localizer} events={[]} style={{ height: "90vh"}}/>
     );
 }
 
-export default BigCalendar;
+export default CalendarComponent;
