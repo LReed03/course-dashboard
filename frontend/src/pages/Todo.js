@@ -10,6 +10,7 @@ function Todo() {
   const [input, setInput] = useState("");
   const [courseID, setCourseID] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [startDate, setStartDate] = useState("");
 
   async function fetchData() {
     let taskList = await loadTasks();
@@ -31,7 +32,9 @@ function Todo() {
       id: Date.now(),
       title: input,
       course: courseID,
-      dueDate: dueDate
+      startDate:startDate, 
+      dueDate: dueDate,
+      calendarcheck: document.getElementById("calendar-check").checked
     };
     if(!verifyDate(newTask)){
       return; // If date verification fails, do not add the task
@@ -72,6 +75,7 @@ function Todo() {
     </div>
   ));
 
+
   return (
     <div className="todo-page">
       <Header />
@@ -85,7 +89,12 @@ function Todo() {
             </option>
           )}</select>
           <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-          <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59"/>
+          <label for="startDate">Start Date</label>
+          <input type="datetime-local" value={startDate} onChange={(e) => setStartDate(e.target.value)} max="9999-12-31T23:59" name="startDate" id="startDate"/>
+          <label for="DueDate">Due Date</label>
+          <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59" name="dueDate" id="dueDate"/>
+          <label for="calendar-check">Include in Calendar</label>
+          <input type="checkbox" id="calendar-check" checked></input>
           <button onClick={handleAdd}>Add Task</button>
         </div>
         {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}
