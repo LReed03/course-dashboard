@@ -13,6 +13,7 @@ function TaskEditor() {
   const [input, setInput] = useState("");
   const [courseID, setCourseID] = useState("");
   const [dueDate, setDueDate] = useState("");
+  const [startDate, setStartDate] = useState("");
   const [task, setTask] = useState({
       id: id,
       title: "",
@@ -38,16 +39,37 @@ function TaskEditor() {
     fetchData();
   }, []);
 
+  function formatDateTimeLocal(date) {
+    const pad = (n) => n.toString().padStart(2, "0");
+    const year = date.getFullYear();
+    const month = pad(date.getMonth() + 1);
+    const day = pad(date.getDate());
+    const hours = pad(date.getHours());
+    const minutes = pad(date.getMinutes());
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+
     function handleEdit() {
       if (input.trim() === "") {
         return; 
+      }
+
+      let finalStart = startDate;
+
+      if (finalStart === "" && dueDate) {
+        let date = new Date(dueDate);
+        date.setHours(date.getHours() - 1);
+        finalStart = formatDateTimeLocal(date);
+        setStartDate(finalStart); 
       }
 
       const newTask = {
         id: task.id,
         title: input,
         course: courseID,
-        dueDate: dueDate
+        startDate: finalStart,
+        dueDate: dueDate,
+        calendarcheck: document.getElementById("calendar-check").checked
       };
 
       if(!verifyDate(newTask)){
@@ -81,7 +103,12 @@ function TaskEditor() {
                     </option>
                 )}</select>
                 <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-                <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59"/>
+                <label for="startDate">Start Date </label>
+                <input type="datetime-local" value={startDate} onChange={(e) => setStartDate(e.target.value)} max="9999-12-31T23:59" name="startDate" id="startDate"/>
+                <label for="DueDate">Due Date</label>
+                <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59" name="dueDate" id="dueDate"/>
+                <label for="calendar-check">Include in Calendar</label>
+                <input type="checkbox" id="calendar-check" value={task.calendarcheck}></input>
                 <button onClick={handleEdit}>Save Changes</button>
                 </div>
             </div>
