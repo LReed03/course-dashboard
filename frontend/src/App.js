@@ -8,7 +8,7 @@ import CourseCreation from './pages/CourseCreation';
 import CourseEditor from './pages/CourseEditor';
 import TaskEditor from './pages/TaskEditor';
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import LoginComp from './components/auth/LoginComp';
+import Login from './pages/Login';
 
 
 
@@ -24,7 +24,7 @@ function App() {
         <Route path="/dashboard/coursecreation" element={<CourseCreation/>} />
         <Route path="/edit-course/:id" element={<CourseEditor />} />
         <Route path="/edit-task/:id" element={<TaskEditor/>} />
-        <Route path="/login" element={<LoginComp/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </div>
   );
