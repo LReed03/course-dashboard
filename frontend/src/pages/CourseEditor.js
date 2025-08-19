@@ -5,6 +5,8 @@ import { loadCourses,  editCourse } from "../api/courseAPI";
 import { useNavigate } from "react-router-dom";
 import "../styles/CourseCreation.css";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../contexts/authcontext";
+import { Navigate } from "react-router-dom";
 
 
 function CourseEditor() {
@@ -19,6 +21,7 @@ function CourseEditor() {
         location: "",
         schedule: []
     });
+    const {userLoggedIn} = useAuth();
 
     const [courses, setCourses] = useState([]);
 
@@ -103,6 +106,7 @@ function CourseEditor() {
 
   return (
     <div  className="course-creation-container">
+      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="container">
         <h1>Edit Course</h1>

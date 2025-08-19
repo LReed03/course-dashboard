@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import { loadCourses, addCourse } from "../api/courseAPI";
 import { useNavigate } from "react-router-dom";
 import "../styles/CourseCreation.css";
+import { useAuth } from "../contexts/authcontext";
+import { Navigate } from "react-router-dom";
 
 
 function CourseCreation() {
@@ -12,6 +14,7 @@ function CourseCreation() {
   const [schedule, setSchedule] = useState([
     {type: "Lecture", days: [], startTime: "", endTime: "" },
   ]);
+  const {userLoggedIn} = useAuth;
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const navigate = useNavigate();
@@ -99,6 +102,7 @@ function CourseCreation() {
 
   return (
     <div  className="course-creation-container">
+      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="container">
         <h1>Add Course</h1>

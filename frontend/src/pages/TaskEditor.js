@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { editTask, loadTasks } from "../api/TodoAPI";
 import { loadCourses } from "../api/courseAPI";
 import "../styles/TaskEditor.css";
+import { useAuth } from "../contexts/authcontext";
+import { Navigate } from "react-router-dom";
 
 
 function TaskEditor() {
@@ -21,6 +23,7 @@ function TaskEditor() {
       dueDate: ""
   });
   const navigate = useNavigate();
+  const {userLoggedIn} = useAuth();
 
   async function fetchData() {
     let courseList = await loadCourses();
@@ -92,6 +95,7 @@ function TaskEditor() {
 
     return (
         <div className="task-editor">
+        {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
         <Header />
         <div className="task-editor-container">
             <div className="todo">

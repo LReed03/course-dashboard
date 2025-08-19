@@ -4,6 +4,8 @@ import { loadCourses } from "../api/courseAPI";
 import "../styles/Todo.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../contexts/authcontext";
 function Todo() {
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -11,6 +13,7 @@ function Todo() {
   const [courseID, setCourseID] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
+  const {userLoggedIn} = useAuth();
   
 
   async function fetchData() {
@@ -111,6 +114,7 @@ function verifyDate(task) {
 
   return (
     <div className="todo-page">
+      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="todo-container">
         <div className="todo">

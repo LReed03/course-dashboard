@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import { Link } from "react-router-dom";
+import { Link, Navigate} from "react-router-dom";
 import Footer from "../components/Footer";
 import Course from "../components/Course";
 import { loadCourses } from "../api/courseAPI";
 import { loadTasks} from "../api/TodoAPI";
 import "../styles/Dashboard.css";
+import { useAuth } from "../contexts/authcontext";
 
 function Dashboard() {
+  const {userLoggedIn} = useAuth();
   const [courses, setCourses] = useState([]);
   const [tasks, setTasks] = useState([]);
 
@@ -35,6 +37,7 @@ function Dashboard() {
 
   return (
     <div>
+      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
       <Header/>
       <div  className="dashboard-page">
         <div  className="dashboard-container">
