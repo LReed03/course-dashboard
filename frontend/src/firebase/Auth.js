@@ -1,5 +1,5 @@
 import { auth } from "./Firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updatePassword, sendEmailVerification} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updatePassword, sendEmailVerification, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink} from "firebase/auth";
 
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
@@ -32,3 +32,8 @@ export const doSendEmailVerification = () =>{
         url: `${window.location.origin}/`
     })
 }
+
+export const doIsSignInWithEmailLink = (href) => {
+  return isSignInWithEmailLink(auth, href);
+};
+

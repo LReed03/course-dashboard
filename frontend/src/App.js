@@ -11,7 +11,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VerifyPage from './pages/VerifyPage';
-
+import RequireVerified from './components/auth/RequireVerified';
 
 
 
@@ -20,15 +20,15 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Landing/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/todo" element={<Todo/>} />
-        <Route path="/schedule" element={<Schedule/>} />
-        <Route path="/dashboard/coursecreation" element={<CourseCreation/>} />
-        <Route path="/edit-course/:id" element={<CourseEditor />} />
-        <Route path="/edit-task/:id" element={<TaskEditor/>} />
+        <Route path="/todo" element={<Todo/>} /> 
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
-        <Route path="/verifypage" element={<VerifyPage/>}/>
+        <Route path="/dashboard" element={<RequireVerified><Dashboard/></RequireVerified>} />
+        <Route path="/schedule" element={<RequireVerified><Schedule/></RequireVerified>} />
+        <Route path="/dashboard/coursecreation" element={<RequireVerified><CourseCreation/></RequireVerified>} />
+        <Route path="/edit-course/:id" element={<RequireVerified><CourseEditor /></RequireVerified>} />
+        <Route path="/edit-task/:id" element={<RequireVerified><TaskEditor/></RequireVerified>} />
+        <Route path="verifypage" element={<VerifyPage/>}/>
       </Routes>
     </div>
   );

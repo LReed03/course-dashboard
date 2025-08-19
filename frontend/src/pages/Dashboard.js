@@ -6,10 +6,8 @@ import Course from "../components/Course";
 import { loadCourses } from "../api/courseAPI";
 import { loadTasks} from "../api/TodoAPI";
 import "../styles/Dashboard.css";
-import { useAuth } from "../contexts/authcontext";
 
 function Dashboard() {
-  const {userLoggedIn, currentUser} = useAuth();
   const [courses, setCourses] = useState([]);
   const [tasks, setTasks] = useState([]);
 
@@ -37,7 +35,6 @@ function Dashboard() {
 
   return (
     <div>
-      {!userLoggedIn && !currentUser.emailVerified && (<Navigate to={'/'} replace={true} />)}
       <Header/>
       <div  className="dashboard-page">
         <div  className="dashboard-container">
