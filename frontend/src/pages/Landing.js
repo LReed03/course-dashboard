@@ -63,7 +63,7 @@ function Landing() {
       <section className="cta-banner">
         <h2>Take Control of Your Semester Today</h2>
         <p>Stop stressing about deadlines — start organizing smarter.</p>
-        <button onClick={() => navigate("/dashboard")}>Try it Free</button>
+        {userLoggedIn ? <button onClick={() => navigate("/dashboard")}>Go to Dashboard</button> : <button onClick={() => navigate("/signup")}>Try it Free</button>}
       </section>
 
       <Footer />
