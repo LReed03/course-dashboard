@@ -33,7 +33,4 @@ export const doSendEmailVerification = () =>{
     })
 }
 
-export const doIsSignInWithEmailLink = (href) => {
-  return isSignInWithEmailLink(auth, href);
-};
 
