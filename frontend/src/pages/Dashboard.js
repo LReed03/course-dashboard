@@ -9,7 +9,7 @@ import "../styles/Dashboard.css";
 import { useAuth } from "../contexts/authcontext";
 
 function Dashboard() {
-  const {userLoggedIn} = useAuth();
+  const {userLoggedIn, currentUser} = useAuth();
   const [courses, setCourses] = useState([]);
   const [tasks, setTasks] = useState([]);
 
@@ -37,7 +37,7 @@ function Dashboard() {
 
   return (
     <div>
-      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+      {!userLoggedIn && !currentUser.emailVerified && (<Navigate to={'/'} replace={true} />)}
       <Header/>
       <div  className="dashboard-page">
         <div  className="dashboard-container">

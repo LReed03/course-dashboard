@@ -7,10 +7,10 @@ import { useAuth } from "../contexts/authcontext";
 import { Navigate } from "react-router-dom";
 
 function Schedule() {
-  const {userLoggedIn} = useAuth();
+  const {userLoggedIn, currentUser} = useAuth();
   return (
     <div>
-      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+      {!userLoggedIn && (!currentUser.emailVerified) && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="schedule-page">
         <CalendarComponent/>

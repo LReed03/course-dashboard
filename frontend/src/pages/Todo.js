@@ -13,7 +13,7 @@ function Todo() {
   const [courseID, setCourseID] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
-  const {userLoggedIn} = useAuth();
+  const {userLoggedIn, currentUser} = useAuth();
   
 
   async function fetchData() {
@@ -114,7 +114,7 @@ function verifyDate(task) {
 
   return (
     <div className="todo-page">
-      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+      {!userLoggedIn && !currentUser.emailVerified && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="todo-container">
         <div className="todo">

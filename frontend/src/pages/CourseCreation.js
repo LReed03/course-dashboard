@@ -14,7 +14,7 @@ function CourseCreation() {
   const [schedule, setSchedule] = useState([
     {type: "Lecture", days: [], startTime: "", endTime: "" },
   ]);
-  const {userLoggedIn} = useAuth;
+  const {userLoggedIn, currentUser} = useAuth;
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri"];
   const navigate = useNavigate();
@@ -102,7 +102,7 @@ function CourseCreation() {
 
   return (
     <div  className="course-creation-container">
-      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+      {!userLoggedIn && !currentUser.emailVerified && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="container">
         <h1>Add Course</h1>

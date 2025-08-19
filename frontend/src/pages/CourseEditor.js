@@ -21,7 +21,7 @@ function CourseEditor() {
         location: "",
         schedule: []
     });
-    const {userLoggedIn} = useAuth();
+    const {userLoggedIn, currentUser} = useAuth();
 
     const [courses, setCourses] = useState([]);
 
@@ -106,7 +106,7 @@ function CourseEditor() {
 
   return (
     <div  className="course-creation-container">
-      {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+      {!userLoggedIn && !currentUser.emailVerified && (<Navigate to={'/'} replace={true} />)}
       <Header />
       <div className="container">
         <h1>Edit Course</h1>

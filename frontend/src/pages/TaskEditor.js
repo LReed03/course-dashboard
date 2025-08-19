@@ -23,7 +23,7 @@ function TaskEditor() {
       dueDate: ""
   });
   const navigate = useNavigate();
-  const {userLoggedIn} = useAuth();
+  const {userLoggedIn, currentUser} = useAuth();
 
   async function fetchData() {
     let courseList = await loadCourses();
@@ -94,8 +94,8 @@ function TaskEditor() {
     }
 
     return (
-        <div className="task-editor">
-        {!userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+      <div className="task-editor">
+      {!userLoggedIn && !currentUser.emailVerified && (<Navigate to={'/'} replace={true} />)}
         <Header />
         <div className="task-editor-container">
             <div className="todo">
