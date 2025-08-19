@@ -9,19 +9,40 @@ function LoginComp(){
     const [password, setPassword] = useState('');
     const [isSigningIn, setIsSigningIn] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const authErrorMsg = (code) => {
+        switch (code) {
+            case "auth/invalid-credential":
+            case "auth/wrong-password":
+            case "auth/user-not-found":
+            return "Email or password is incorrect.";
+            case "auth/invalid-email":
+            return "Please enter a valid email address.";
+            case "auth/too-many-requests":
+            return "Too many attempts. Try again later or reset your password.";
+            case "auth/network-request-failed":
+            return "Network error. Check your connection.";
+            default:
+            return "Something went wrong. Please try again.";
+        }
+        };
 
     const onSubmit = async (e) => {
         e.preventDefault()
         if(!isSigningIn){
             setIsSigningIn(true);
-            await doSignInWithEmailAndPassword(email, password);
+            await doSignInWithEmailAndPassword(email, password).catch(err => {
+                setErrorMessage(authErrorMsg(err.code));
+                setIsSigningIn(false);
+            });
         }
+
     }
     const onGoogleSignIn = (e) =>{
         e.preventDefault();
         if(!isSigningIn){
             setIsSigningIn(true);
             doSignInWithGoogle().catch(err => {
+                setErrorMessage(authErrorMsg(err.code));
                 setIsSigningIn(false);
             });
         }
