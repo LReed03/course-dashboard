@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Landing.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useAuth } from "../contexts/authcontext";
 
 function Landing() {
   const navigate = useNavigate();
 
+  const {userLoggedIn} = useAuth();
   return (
     <div className="landing">
       <Header />
@@ -15,7 +17,7 @@ function Landing() {
         <div className="hero-content">
           <h1>Master Your Semester</h1>
           <p>Plan smarter. Stay focused. Hit every deadline with ease.</p>
-          <button onClick={() => navigate("/dashboard")}>Launch Dashboard</button>
+          {userLoggedIn ? <button onClick={() => navigate("/dashboard")}>Launch Dashboard</button> : <button onClick={() => navigate("/login")}>Login</button>}
         </div>
       </section>
 
