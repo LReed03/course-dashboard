@@ -34,20 +34,13 @@ function VerifyPage() {
   }
 
   return (
-    <main className="w-full h-screen flex items-center justify-center">
+    <main>
       {(!userLoggedIn || user.emailVerified) && <Navigate to="/" replace={true} />}
-      <div className="w-96 text-gray-600 space-y-5 p-6 shadow-xl border rounded-xl text-center">
-        <h2 className="text-xl font-bold">Verify Your Email</h2>
-        <p className="text-sm text-gray-600">{infoMessage}</p>
-
-        {errorMessage && <p className="text-red-600 font-bold">{errorMessage}</p>}
-
-        <button
-          onClick={handleIHaveVerified}
-          className="w-full px-4 py-2 text-white font-medium rounded-lg bg-indigo-600 hover:bg-indigo-700 hover:shadow-xl transition duration-300"
-        >
-          I have verified
-        </button>
+      <div>
+        <h2>Verify Your Email</h2>
+        <p>{infoMessage}</p>
+        {errorMessage && <p>{errorMessage}</p>}
+        <button onClick={handleIHaveVerified}>I have verified</button>
       </div>
     </main>
   )
