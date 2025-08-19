@@ -8,6 +8,7 @@ import CourseCreation from './pages/CourseCreation';
 import CourseEditor from './pages/CourseEditor';
 import TaskEditor from './pages/TaskEditor';
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import LoginComp from './components/auth/LoginComp';
 
 
 
@@ -15,17 +16,16 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing/>} />
-          <Route path="/dashboard" element={<Dashboard/>} />
-          <Route path="/todo" element={<Todo/>} />
-          <Route path="/schedule" element={<Schedule/>} />
-          <Route path="/dashboard/coursecreation" element={<CourseCreation/>} />
-          <Route path="/edit-course/:id" element={<CourseEditor />} />
-          <Route path="/edit-task/:id" element={<TaskEditor/>} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/todo" element={<Todo/>} />
+        <Route path="/schedule" element={<Schedule/>} />
+        <Route path="/dashboard/coursecreation" element={<CourseCreation/>} />
+        <Route path="/edit-course/:id" element={<CourseEditor />} />
+        <Route path="/edit-task/:id" element={<TaskEditor/>} />
+        <Route path="/login" element={<LoginComp/>}/>
+      </Routes>
     </div>
   );
 }
