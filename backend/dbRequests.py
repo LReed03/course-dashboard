@@ -47,7 +47,14 @@ def edittask(uid, task):
 def deletetask(uid, taskid):
     return
 
+def loadschedule(uid, courseId):
+    return
 
+def addschedule(uid, schedule):
+    return
 
+def editschedule(uid, schedule):
+    return
 
-    
+def deleteschedule(uid, schedule):
+    return
