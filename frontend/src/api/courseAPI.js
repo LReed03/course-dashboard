@@ -1,49 +1,48 @@
-export async function loadCourses() {
-    const backendEndpoint = "http://localhost:5000/courses";
+import { apiFetch } from "./AuthAPI";
+const APIURL = "http://localhost:5000/courses";
+
+export async function loadCourses(){
     try{
-        const response = await fetch(backendEndpoint, {
+        let data = await apiFetch(APIURL, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         });
-        const data = await response.json();
+    
         return data || [];
     }
-    catch (error) {
+    catch (error){
         console.error("Error loading tasks:", error);
         return [];
     }
+    
 }
 
 export async function addCourse(course){
-    const backendEndpoint = "http://localhost:5000/courses";
     try{
-        const response = await fetch(backendEndpoint, {
+        return await apiFetch(APIURL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(course)
         });
-        return await response.json();
     }
     catch (error) {
         console.error("Error adding task:", error);
     }
 }
 
-export async function deleteCourse(course) {
-    const backendEndpoint = "http://localhost:5000/courses";
+export async function deleteCourse(course) {;
     try{
-        const response = await fetch(backendEndpoint, {
+        return await apiFetch(APIURL, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(course)
         });
-        return await response.json();
     }
     catch (error) {
         console.error("Error loading tasks:", error);
@@ -51,10 +50,15 @@ export async function deleteCourse(course) {
 }
 
 export async function editCourse(course){
-    const backendEndpoint = `http://localhost:5000/courses/${course.id}`;
-    await fetch(backendEndpoint, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(course)
-  });
-}
+    try{
+        await fetch(`${APIURL}/${course.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(course)
+    });
+    }
+    catch(error){
+        console.error("Error loading tasks:", error)
+    }
+    }
+    

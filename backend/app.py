@@ -10,7 +10,6 @@ cred_path = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]  # path to your JSON
 cred = credentials.Certificate(cred_path)                  # or: credentials.ApplicationDefault
 default_app = firebase_admin.initialize_app()
 
-print(auth.get_user_by_email("lreed0383@gmail.com").uid)
 
 tasks = []
 courses = []
@@ -33,10 +32,16 @@ def verify_token():
 
 @app.route("/tasks", methods=["GET"])
 def get_tasks():
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401  
     return jsonify(tasks)
 
 @app.route("/tasks", methods=["POST"])
 def add_task():
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task:
         tasks.append(task)
@@ -45,6 +50,9 @@ def add_task():
 
 @app.route("/tasks", methods=["DELETE"])
 def delete_task():
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task in tasks:
         tasks.remove(task) 
@@ -53,6 +61,9 @@ def delete_task():
 
 @app.route("/tasks/<int:task_id>", methods=["PUT"])
 def update_task(task_id):
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
     data = request.json
     task = next((t for t in tasks if t["id"] == task_id), None)
     if not task:
@@ -67,10 +78,19 @@ def update_task(task_id):
 
 @app.route("/courses", methods=["GET"])
 def get_courses():
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
+        print("not verified")
+    print("verified")
     return jsonify(courses)
+
 
 @app.route("/courses", methods=["POST"])
 def add_course():
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course:
         courses.append(course)
@@ -79,6 +99,9 @@ def add_course():
 
 @app.route("/courses", methods=["DELETE"])
 def delete_course():
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course in courses:
         courses.remove(course) 
@@ -87,6 +110,9 @@ def delete_course():
 
 @app.route("/courses/<int:course_id>", methods=["PUT"])
 def update_course(course_id):
+    uid = verify_token()
+    if not uid:
+        jsonify({"error": "Unauthorized"}), 401 
     data = request.json
 
     course = next((c for c in courses if c["id"] == course_id), None)

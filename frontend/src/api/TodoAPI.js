@@ -1,14 +1,16 @@
+import { apiFetch } from "./AuthAPI";
+const APIURL = "http://localhost:5000/tasks";
+
+
 export async function addTask(task){
-    const backendEndpoint = "http://localhost:5000/tasks";
     try{
-        const response = await fetch(backendEndpoint, {
+        return await apiFetch(APIURL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(task)
         });
-        return await response.json();
     }
     catch (error) {
         console.error("Error adding task:", error);
@@ -16,15 +18,13 @@ export async function addTask(task){
 }
 
 export async function loadTasks() {
-    const backendEndpoint = "http://localhost:5000/tasks";
     try{
-        const response = await fetch(backendEndpoint, {
+        const data = await apiFetch(APIURL, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         });
-        const data = await response.json();
         return data || [];
     }
     catch (error) {
@@ -34,9 +34,8 @@ export async function loadTasks() {
 }
 
 export async function editTask(task) {
-    const backendEndpoint = `http://localhost:5000/tasks/${task.id}`;
     try{
-        await fetch(backendEndpoint, {
+        await apiFetch(`${APIURL}/${task.id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(task)
@@ -49,16 +48,14 @@ export async function editTask(task) {
 
 
 export async function deleteTask(task) {
-    const backendEndpoint = "http://localhost:5000/tasks";
     try{
-        const response = await fetch(backendEndpoint, {
+        return await apiFetch(APIURL, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(task)
         });
-        return await response.json();
     }
     catch (error) {
         console.error("Error loading tasks:", error);
