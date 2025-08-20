@@ -12,7 +12,6 @@ function Footer() {
   return (
     <footer className="footer">
       <p>Landon Reed • © 2025</p>
-      {userLoggedIn && <button onClick={signOut}>Sign Out</button>}
     </footer>
   );
 }

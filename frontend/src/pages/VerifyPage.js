@@ -5,6 +5,10 @@ import { reload } from 'firebase/auth'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/authcontext'
 import { doSendEmailVerification } from '../firebase/Auth'
+import "../styles/VerifyPage.css";
+import Header from '../components/Header'
+import Footer from '../components/Footer'
+
 
 function VerifyPage() {
   const navigate = useNavigate()
@@ -39,18 +43,23 @@ function VerifyPage() {
      setMessage("Verification Email Resent! Check your inbox!!")
   }
 
-  return (
-    <main>
-      {(!userLoggedIn || user.emailVerified) && <Navigate to="/Dashboard" replace={true} />}
-      <div>
-        <h2>Verify Your Email</h2>
-        <p>{infoMessage}</p>
-        {message && <p>{message}</p>}
-        <button onClick={handleIHaveVerified}>I have verified</button>
-        <button onClick={resendVerificationEmail}>Resend Verification Email</button>
+   return (
+    <div className='verify-page'>
+      <Header/>
+      <main className="verify-container">
+          {(!userLoggedIn || user.emailVerified) && <Navigate to="/Dashboard" replace={true} />}
+          <div className="verify-card">
+            <h2 className="verify-title">Verify Your Email</h2>
+            <p className="verify-info">{infoMessage}</p>
+            {message && <p className="verify-message">{message}</p>}
+            <div className="verify-actions">
+              <button className="btn btn-primary" onClick={handleIHaveVerified}>I have verified</button>
+              <button className="btn btn-secondary" onClick={resendVerificationEmail}>Resend Verification Email</button>
+            </div>
+          </div>
+        </main>
+        <Footer/>
       </div>
-    </main>
-  )
-}
-
+    )
+  }
 export default VerifyPage

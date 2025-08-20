@@ -3,7 +3,7 @@ import { Navigate, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/authcontext'
 import { auth } from '../../firebase/Firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth'
-import { doSignOut } from '../../firebase/Auth'
+import "../../styles/SignupComp.css";
 
 function SignupComp() {
   const navigate = useNavigate()
@@ -52,16 +52,14 @@ function SignupComp() {
     <>
       {userLoggedIn && <Navigate to="/verifypage" replace={true} />}
 
-      <main>
-        <div>
-          <div>
-            <h3>
-              Create a New Account
-            </h3>
+      <main className="signup-container">
+        <div className="signup-card">
+          <div className="signup-header">
+            <h3>Create a New Account</h3>
           </div>
 
-          <form onSubmit={onSubmit}>
-            <div>
+          <form onSubmit={onSubmit} className="signup-form">
+            <div className="form-group">
               <label>Email</label>
               <input
                 type="email"
@@ -69,10 +67,11 @@ function SignupComp() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="signup-input"
               />
             </div>
 
-            <div>
+            <div className="form-group">
               <label>Password</label>
               <input
                 disabled={isRegistering}
@@ -81,10 +80,11 @@ function SignupComp() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="signup-input"
               />
             </div>
 
-            <div>
+            <div className="form-group">
               <label>Confirm Password</label>
               <input
                 disabled={isRegistering}
@@ -93,26 +93,28 @@ function SignupComp() {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                className="signup-input"
               />
             </div>
 
             {errorMessage && (
-              <span>{errorMessage}</span>
+              <span className="error-message">{errorMessage}</span>
             )}
             {successMessage && (
-              <span>{successMessage}</span>
+              <span className="success-message">{successMessage}</span>
             )}
 
             <button
               type="submit"
               disabled={isRegistering}
+              className="signup-button"
             >
               {isRegistering ? 'Signing Up...' : 'Sign Up'}
             </button>
 
-            <div>
+            <div className="login-redirect">
               Already have an account?{' '}
-              <Link to="/login">
+              <Link to="/login" className="login-link">
                 Continue
               </Link>
             </div>

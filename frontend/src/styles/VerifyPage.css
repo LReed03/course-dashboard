@@ -1,0 +1,79 @@
+
+
+/* Page background + centering */
+.verify-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fa; /* same backdrop as login/signup */
+  min-height: 100vh;
+}
+
+/* Card */
+.verify-card {
+  width: 100%;
+  max-width: 540px;
+  background: #fff;
+  padding: 2rem 2.25rem;
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(16,24,40,0.08);
+  text-align: center;
+}
+
+/* Text */
+.verify-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #111827;
+  margin: 0 0 0.5rem;
+}
+
+.verify-info {
+  color: #4b5563;
+  font-size: 0.98rem;
+  margin: 0.25rem 0 0.75rem;
+}
+
+.verify-message {
+  margin: 0.5rem 0 1rem;
+  font-size: 0.95rem;
+  color: #111827; /* neutral; messages themselves supply the tone */
+}
+
+/* Actions */
+.verify-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+/* Buttons (shared look with auth pages) */
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: transform 0.02s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* Primary = blue */
+.btn-primary {
+  background: #3b5fb4;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(59,95,180,0.25);
+}
+.btn-primary:hover { background: #2f50a2; }
+
+/* Secondary = subtle outline */
+.btn-secondary {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+}
+.btn-secondary:hover { background: #f3f4f6; }
