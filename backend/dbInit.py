@@ -1,5 +1,4 @@
 import sqlalchemy as db
-import os
 
 engine = db.create_engine("sqlite:///backend/app.db")
 
@@ -13,11 +12,12 @@ Student = db.Table('Student', metadata,
               )
 
 Class = db.Table('Class', metadata,
-            db.Column('Id', db.Integer() , primary_key=True),
-            db.Column('Name', db.String(255)),
-            db.Column('Code', db.String(255)),
-            db.Column('Professor', db.String(255)),
-            db.Column('Location', db.String(255))
+            db.Column('id', db.Integer() , primary_key=True),
+            db.Column('uid', db.String(255), db.ForeignKey("Student.Id")),
+            db.Column('name', db.String(255)),
+            db.Column('code', db.String(255)),
+            db.Column('professor', db.String(255)),
+            db.Column('location', db.String(255))
                  )
 
 # Schedule = db.Table('Table', metadata,

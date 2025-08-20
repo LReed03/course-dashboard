@@ -3,6 +3,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import auth, credentials
 import os
+from dbRequests import loadclasses, addclass
 
 app = Flask(__name__)
 CORS(app)
@@ -13,6 +14,9 @@ default_app = firebase_admin.initialize_app()
 
 tasks = []
 courses = []
+DEFAULT_SCHEDULE = [
+    {"type": "Lecture", "days": [], "startTime": "", "endTime": ""}
+]
 
 "Authentication"
 
@@ -82,7 +86,12 @@ def get_courses():
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
         print("not verified")
-    print("verified")
+    courses = loadclasses(uid)
+    for c in courses:
+        if not c.get("schedule"):   
+            c["schedule"] = DEFAULT_SCHEDULE
+    print(courses)
+
     return jsonify(courses)
 
 
@@ -93,7 +102,9 @@ def add_course():
         jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course:
-        courses.append(course)
+        print(course)
+        result = addclass(uid, course)
+        print(result)
         return jsonify({"message": "Course added"}), 201
     return jsonify({"error": "No course provided"}), 400
 
