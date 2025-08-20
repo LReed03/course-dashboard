@@ -34,6 +34,7 @@ function Header() {
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/todo">To-Do</Link>
         <Link to="/schedule">Schedule</Link>
+        <Link to="/">Account</Link>
       </nav>)}
     </header>
   );
