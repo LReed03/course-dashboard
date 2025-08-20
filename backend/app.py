@@ -15,6 +15,20 @@ print(auth.get_user_by_email("lreed0383@gmail.com").uid)
 tasks = []
 courses = []
 
+"Authentication"
+
+def verify_token():
+    auth_header = request.headers.get("Authorization")
+    if not auth_header:
+        return None
+    id_token = auth_header.split(" ").pop()
+    try:
+        decoded_token = auth.verify_id_token(id_token)
+        return decoded_token["uid"]
+    except Exception as e:
+        print("Token verification failed:", e)
+        return None
+
 "Task APIS"
 
 @app.route("/tasks", methods=["GET"])
