@@ -49,7 +49,7 @@ function LoginComp(){
     }
     return(
         <div>
-            {userLoggedIn && (<Navigate to={'/'} replace={true} />)}
+            {userLoggedIn && (<Navigate to={'/dashboard'} replace={true} />)}
 
             <main>
                 <div>

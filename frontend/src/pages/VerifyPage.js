@@ -4,10 +4,11 @@ import { auth } from '../firebase/Firebase'
 import { reload } from 'firebase/auth'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/authcontext'
+import { doSendEmailVerification } from '../firebase/Auth'
 
 function VerifyPage() {
   const navigate = useNavigate()
-  const [errorMessage, setErrorMessage] = useState('')
+  const [message, setMessage] = useState('')
   const [infoMessage] = useState(
     'Check your email inbox and verify your account.'
   )
@@ -16,7 +17,7 @@ function VerifyPage() {
 
   const handleIHaveVerified = async () => {
     if (!auth.currentUser) {
-      setErrorMessage('No user signed in.')
+      setMessage('No user signed in.')
       return
     }
     try {
@@ -26,21 +27,27 @@ function VerifyPage() {
       if (auth.currentUser.emailVerified) {
         navigate('/') // ✅ only redirect when actually verified
       } else {
-        setErrorMessage('Still not verified. Please check again later.')
+        setMessage('Still not verified. Please check again later.')
       }
     } catch (err) {
-      setErrorMessage(err?.message || 'Something went wrong.')
+      setMessage(err?.message || 'Something went wrong.')
     }
+  }
+
+  const resendVerificationEmail = async () =>{
+     await doSendEmailVerification()
+     setMessage("Verification Email Resent! Check your inbox!!")
   }
 
   return (
     <main>
-      {(!userLoggedIn || user.emailVerified) && <Navigate to="/" replace={true} />}
+      {(!userLoggedIn || user.emailVerified) && <Navigate to="/Dashboard" replace={true} />}
       <div>
         <h2>Verify Your Email</h2>
         <p>{infoMessage}</p>
-        {errorMessage && <p>{errorMessage}</p>}
+        {message && <p>{message}</p>}
         <button onClick={handleIHaveVerified}>I have verified</button>
+        <button onClick={resendVerificationEmail}>Resend Verification Email</button>
       </div>
     </main>
   )

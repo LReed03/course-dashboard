@@ -39,17 +39,18 @@ function SignupComp() {
 
       // 3. Show message + redirect
       setSuccessMessage("Verification email sent — check your inbox.")
-      navigate('/verifypage')   // 👈 go to VerifyPage
-    } catch (err) {
+    } 
+    catch (err) {
       setErrorMessage(err?.message || "Sign up failed.")
-    } finally {
+    } 
+    finally {
       setIsRegistering(false)
     }
   }
 
   return (
     <>
-      {userLoggedIn && <Navigate to="/" replace={true} />}
+      {userLoggedIn && <Navigate to="/verifypage" replace={true} />}
 
       <main>
         <div>
