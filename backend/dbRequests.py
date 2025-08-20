@@ -27,5 +27,27 @@ def addclass(uid, course):
     with engine.begin() as conn:
         conn.execute(query)
 
+def editclass(uid, course):
+    return
+
+def deleteclass(uid, courseid):
+    return
+
+# Task DB Requests
+
+def loadtasks(uid):
+    return
+
+def addtask(uid, task):
+    return
+
+def edittask(uid, task):
+    return
+
+def deletetask(uid, taskid):
+    return
+
+
+
 
     
