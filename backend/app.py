@@ -102,9 +102,9 @@ def add_course():
         jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course:
-        print(course)
-        result = addclass(uid, course)
-        print(result)
+        addclass(uid, course)
+        if course['schedule']:
+            return
         return jsonify({"message": "Course added"}), 201
     return jsonify({"error": "No course provided"}), 400
 
@@ -115,7 +115,8 @@ def delete_course():
         jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course in courses:
-        courses.remove(course) 
+        courses.remove(course)
+        # make sure to remove schedules assosiated with course 
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 
