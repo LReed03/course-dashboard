@@ -1,7 +1,16 @@
 from flask_cors import CORS
 from flask import Flask, jsonify, request
+import firebase_admin
+from firebase_admin import auth, credentials
+import os
+
 app = Flask(__name__)
 CORS(app)
+cred_path = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]  # path to your JSON
+cred = credentials.Certificate(cred_path)                  # or: credentials.ApplicationDefault
+default_app = firebase_admin.initialize_app()
+
+print(auth.get_user_by_email("lreed0383@gmail.com").uid)
 
 tasks = []
 courses = []
