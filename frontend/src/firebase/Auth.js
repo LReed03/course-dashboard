@@ -29,7 +29,8 @@ export const doSignOut = () => {
 // }
 export const doSendEmailVerification = () =>{
     return sendEmailVerification(auth.currentUser, {
-        url: `${window.location.origin}/`
+        url: `${window.location.origin}/`,
+        handleCodeInApp: true
     })
 }
 

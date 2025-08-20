@@ -39,8 +39,14 @@ function VerifyPage() {
   }
 
   const resendVerificationEmail = async () =>{
-     await doSendEmailVerification()
-     setMessage("Verification Email Resent! Check your inbox!!")
+    try{
+      await doSendEmailVerification()
+      setMessage("Verification Email Resent! Check your inbox!!")
+    }
+    catch(error){
+      setMessage("Sorry you must wait before sending another email!")
+    }
+     
   }
 
    return (
