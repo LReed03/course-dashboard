@@ -47,6 +47,8 @@ def edittask(uid, task):
 def deletetask(uid, taskid):
     return
 
+# Schedule DB Requests
+
 def loadschedule(uid, courseId):
     return
 
