@@ -28,12 +28,14 @@ def addclass(uid, course):
         conn.execute(query)
 
 def editclass(uid, course):
-    query = 
-    return
+    query = db.update(Class).where((Class.c.uid == uid) & (Class.c.id == course['courseid'])).values(name = course['name'], code = course['code'], professor = course['professor'], location = course['location'])
+    with engine.begin() as conn:
+        conn.execute(query)
 
 def deleteclass(uid, courseid):
-    query = Class.delete('Class').where((Class.c.uid == uid) & (Class.c.courseid == courseid))
-    return
+    query = db.delete(Class).where((Class.c.uid == uid) & (Class.c.id == courseid))
+    with engine.begin() as conn:
+        conn.execute(query)
 
 # Task DB Requests
 
