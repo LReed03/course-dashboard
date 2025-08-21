@@ -71,3 +71,15 @@ def editschedule(uid, schedule):
 
 def deleteschedule(uid, schedule):
     return
+
+def createuser(uid):
+    return
+
+def deleteuser(uid):
+    return
+
+def edituser(uid):
+    return
+
+def loaduser(uid):
+    return
