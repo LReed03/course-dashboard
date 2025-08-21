@@ -51,7 +51,7 @@ export async function deleteCourse(course) {;
 
 export async function editCourse(course){
     try{
-        await fetch(`${APIURL}/${course.id}`, {
+        await apiFetch(`${APIURL}/${course.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(course)

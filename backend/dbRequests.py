@@ -27,10 +27,13 @@ def addclass(uid, course):
     with engine.begin() as conn:
         conn.execute(query)
 
-def editclass(uid, course):
-    query = db.update(Class).where((Class.c.uid == uid) & (Class.c.id == course['courseid'])).values(name = course['name'], code = course['code'], professor = course['professor'], location = course['location'])
+def editclass(uid, course, course_id):
+    query = db.update(Class).where((Class.c.uid == uid) & (Class.c.id == course_id)).values(name = course['name'], code = course['code'], professor = course['professor'], location = course['location'])
     with engine.begin() as conn:
-        conn.execute(query)
+        result = conn.execute(query)
+        print("Update attempt:", {"uid": uid, "course_id": course_id, "rowcount": result.rowcount})
+        return result.rowcount
+
 
 def deleteclass(uid, courseid):
     query = db.delete(Class).where((Class.c.uid == uid) & (Class.c.id == courseid))

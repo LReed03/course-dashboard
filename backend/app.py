@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import auth, credentials
 import os
-from dbRequests import loadclasses, addclass
+from dbRequests import loadclasses, addclass, editclass, deleteclass
 
 app = Flask(__name__)
 CORS(app)
@@ -90,7 +90,6 @@ def get_courses():
     for c in courses:
         if not c.get("schedule"):   
             c["schedule"] = DEFAULT_SCHEDULE
-    print(courses)
 
     return jsonify(courses)
 
@@ -114,8 +113,9 @@ def delete_course():
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
     course = request.json
-    if course in courses:
-        courses.remove(course)
+    if course:
+        courseid = course['id']
+        deleteclass(uid, courseid)
         # make sure to remove schedules assosiated with course 
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
@@ -125,18 +125,8 @@ def update_course(course_id):
     uid = verify_token()
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
-    data = request.json
-
-    course = next((c for c in courses if c["id"] == course_id), None)
-    if not course:
-        return {"error": "Course not found"}, 404
-
-    course["name"] = data.get("name", course["name"])
-    course["code"] = data.get("code", course["code"])
-    course["professor"] = data.get("professor", course["professor"])
-    course["location"] = data.get("location", course["location"])
-    course["schedule"] = data.get("schedule", course["schedule"])
-
+    course = request.json
+    editclass(uid, course, course_id)
     return {"message": "Course updated", "course": course}, 200
 
         
