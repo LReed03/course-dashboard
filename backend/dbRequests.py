@@ -28,9 +28,11 @@ def addclass(uid, course):
         conn.execute(query)
 
 def editclass(uid, course):
+    query = 
     return
 
 def deleteclass(uid, courseid):
+    query = Class.delete('Class').where((Class.c.uid == uid) & (Class.c.courseid == courseid))
     return
 
 # Task DB Requests

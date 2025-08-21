@@ -8,7 +8,6 @@ import "../styles/CourseCreation.css";
 
 function CourseCreation() {
   const [courses, setCourses] = useState([]);
-  const [highestId, setHighestId] = useState(0);
   const [schedule, setSchedule] = useState([
     {type: "Lecture", days: [], startTime: "", endTime: "" },
   ]);
@@ -22,20 +21,12 @@ function CourseCreation() {
   async function fetchData() {
     let courseList = await loadCourses();
     setCourses(courseList);
-    let id = checkHighestID(courseList);
-    setHighestId(id);
   }
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  function checkHighestID(courseList) {
-    if (!courseList || courseList.length === 0) {
-      return 0;
-    }
-    return Math.max(...courseList.map((course) => course.id));
-  }
 
   function handleDayChange(index, day) {
     const updated = [...schedule];
@@ -75,7 +66,6 @@ function CourseCreation() {
   function handleSubmit(e) {
     e.preventDefault();
     const courseData = {
-      id: highestId + 1,
       name: e.target.courseName.value,
       code: e.target.courseCode.value,
       professor: e.target.professorName.value,
