@@ -50,7 +50,6 @@ function handleAdd() {
   }
 
   const newTask = {
-    id: Date.now(),
     title: input,
     course: courseID,
     startDate: finalStart,  
