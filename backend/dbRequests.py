@@ -6,8 +6,9 @@ conn = engine.connect()
 metadata = db.MetaData()
 
 # Adding table names
-Class = db.Table('Class', metadata, 
-                 autoload_with=engine)
+Class = db.Table('Class', metadata, autoload_with=engine)
+
+Task = db.Table('Task', metadata, autoload_with=engine)
 
 
 # Class DB Requests
@@ -43,7 +44,10 @@ def deleteclass(uid, courseid):
 # Task DB Requests
 
 def loadtasks(uid):
-    return
+    query = db.select(Task).where((Task.c.uid == uid))
+    result = conn.execute(query)
+    rows = [dict(row._mapping) for row in result]  # convert to dict
+    return rows
 
 def addtask(uid, task):
     return
