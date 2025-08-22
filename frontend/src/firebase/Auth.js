@@ -5,7 +5,6 @@ import { signup } from "../api/AuthAPI";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
     const result = createUserWithEmailAndPassword(auth, email, password);
-    await signup();
     return result;
 }
 

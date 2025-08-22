@@ -92,7 +92,7 @@ def deleteschedule(uid, schedule):
 # User DB Requests
 
 def createuser(uid):
-    query = db.insert(User).values(uid = uid)
+    query = db.insert(User).values(Id = uid)
     with engine.begin() as conn:
         conn.execute(query)
 

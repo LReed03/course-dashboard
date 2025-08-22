@@ -98,6 +98,7 @@ function SignupComp() {
                 className="signup-input"
               />
             </div>
+            
 
             {errorMessage && (
               <span className="error-message">{errorMessage}</span>
