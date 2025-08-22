@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/authcontext'
 import { auth } from '../../firebase/Firebase'
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth'
 import "../../styles/SignupComp.css";
+import { signup } from '../../api/AuthAPI'
 
 function SignupComp() {
   const navigate = useNavigate()
@@ -32,9 +33,10 @@ function SignupComp() {
 
     try {
       // 1. Create user
-        const { user } = await createUserWithEmailAndPassword(auth, email, password)
-        console.log(user.user)
+      const { user } = await createUserWithEmailAndPassword(auth, email, password)
+      console.log(user.user)
       // 2 . Send verification email
+      await signup();
       await sendEmailVerification(user)
 
       // 3. Show message + redirect

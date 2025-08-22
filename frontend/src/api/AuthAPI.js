@@ -35,7 +35,7 @@ export async function apiFetch(path, options = {}) {
 
 export async function signup(){
   try{
-    await apiFetch("/signup", {
+    await apiFetch("http://localhost:5000/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
