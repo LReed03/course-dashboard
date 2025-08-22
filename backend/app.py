@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import auth, credentials
 import os
-from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser
+from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser, loadtasks, addtask, edittask, deletetask
 
 app = Flask(__name__)
 CORS(app)
@@ -38,7 +38,9 @@ def verify_token():
 def get_tasks():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401  
+        jsonify({"error": "Unauthorized"}), 401
+        print("not verified")
+    tasks = loadtasks(uid)  
     return jsonify(tasks)
 
 @app.route("/tasks", methods=["POST"])
@@ -48,7 +50,7 @@ def add_task():
         jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task:
-        tasks.append(task)
+        addtask(uid, task)
         return jsonify({"message": "Task added"}), 201
     return jsonify({"error": "No task provided"}), 400
 
@@ -58,8 +60,8 @@ def delete_task():
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
     task = request.json
-    if task in tasks:
-        tasks.remove(task) 
+    if task:
+        deletetask(task)
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 
@@ -68,13 +70,8 @@ def update_task(task_id):
     uid = verify_token()
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
-    data = request.json
-    task = next((t for t in tasks if t["id"] == task_id), None)
-    if not task:
-        return {"error": "Task not found"}, 404
-    task["title"] = data.get("title", task["title"])
-    task["dueDate"] = data.get("dueDate", task["dueDate"])
-    task["courseID"] = data.get("courseID", task["courseID"])
+    task = request.json
+    edittask(uid, task)
     return {"message": "Task updated", "task": task}, 200   
 
 
