@@ -51,7 +51,7 @@ function handleAdd() {
 
   const newTask = {
     title: input,
-    course: courseID,
+    courseId: courseID,
     startDate: finalStart,  
     dueDate: dueDate,
     calendarcheck: document.getElementById("calendar-check").checked

@@ -53,7 +53,7 @@ def loadtasks(uid):
 
 def addtask(uid, task):
     query = db.insert(Tasks).values(uid = uid, 
-                                   courseId = task['course'], 
+                                   courseId = task['courseId'], 
                                    title = task['title'],
                                    startDate = task['startDate'],
                                    dueDate = task['dueDate'],
@@ -63,7 +63,7 @@ def addtask(uid, task):
 
 
 def edittask(uid, task):
-    query = db.update(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.id == task['id'])).values(courseId = task['course'], title = task['title'], startDate = task['startDate'], dueDate = task['dueDate'], calendarcheck = task["calendarcheck"])
+    query = db.update(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.id == task['id'])).values( title = task['title'], startDate = task['startDate'], dueDate = task['dueDate'], calendarcheck = task["calendarcheck"])
     with engine.begin() as conn:
         result = conn.execute(query)
         return result.rowcount
