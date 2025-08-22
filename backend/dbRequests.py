@@ -10,6 +10,8 @@ Class = db.Table('Class', metadata, autoload_with=engine)
 
 Task = db.Table('Task', metadata, autoload_with=engine)
 
+User = db.Table('User', metadata, autoload_with=engine)
+
 
 # Class DB Requests
 
@@ -50,13 +52,27 @@ def loadtasks(uid):
     return rows
 
 def addtask(uid, task):
-    return
+    query = db.insert(Task).values(uid = uid, 
+                                   courseId = task['course'], 
+                                   title = task['title'],
+                                   startDate = task['startDate'],
+                                   dueDate = task['dueDate'],
+                                   calendarcheck = task['calendarcheck'])
+    with engine.begin() as conn:
+        conn.execute(query)
+
 
 def edittask(uid, task):
-    return
+    query = db.update(Task).where((Task.c.uid == uid) & (Task.c.id == Task['id'])).values(name = course['name'], code = course['code'], professor = course['professor'], location = course['location'])
+    with engine.begin() as conn:
+        result = conn.execute(query)
+        return result.rowcount
 
 def deletetask(uid, taskid):
-    return
+    query = db.delete(Task).where((Task.c.uid == uid) & (Task.c.id == taskid))
+    with engine.begin() as conn:
+        conn.execute(query)
+
 
 # Schedule DB Requests
 
@@ -72,13 +88,16 @@ def editschedule(uid, schedule):
 def deleteschedule(uid, schedule):
     return
 
+# User DB Requests
+
 def createuser(uid):
+    query = db.insert(User).values(uid = uid)
     return
 
 def deleteuser(uid):
     return
 
-def edituser(uid):
+def edituser(User):
     return
 
 def loaduser(uid):

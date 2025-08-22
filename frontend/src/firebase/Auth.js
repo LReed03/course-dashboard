@@ -1,9 +1,12 @@
 import { auth } from "./Firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, updatePassword, sendEmailVerification, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink} from "firebase/auth";
+import { signup } from "../api/AuthAPI";
 
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+    const result = createUserWithEmailAndPassword(auth, email, password);
+    signup();
+    return result;
 }
 
 export const doSignInWithEmailAndPassword = (email, password) => {
@@ -13,6 +16,7 @@ export const doSignInWithEmailAndPassword = (email, password) => {
 export const doSignInWithGoogle = async() => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
+    signup();
     return result;
 }
 

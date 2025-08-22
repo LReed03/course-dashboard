@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import auth, credentials
 import os
-from dbRequests import loadclasses, addclass, editclass, deleteclass
+from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser
 
 app = Flask(__name__)
 CORS(app)
@@ -128,6 +128,17 @@ def update_course(course_id):
     course = request.json
     editclass(uid, course, course_id)
     return {"message": "Course updated", "course": course}, 200
+
+# User
+
+@app.route("/signup", methods=["Post"])
+def signup():
+    uid = verify_token()
+    if not uid:
+        return jsonify({"error": "Unauthorized"}), 401
+    createuser(uid)
+    return jsonify({"sucess": "User Created"}), 200
+
 
         
 

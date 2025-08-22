@@ -31,3 +31,18 @@ export async function apiFetch(path, options = {}) {
   if (!res.ok) throw new Error(`${res.status} ${await res.text().catch(() => "")}`);
   return res.json();
 }
+
+
+export async function signup(){
+  try{
+    await apiFetch("/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+        });
+  }
+  catch(error){
+    console.error("Error signing up:", error);
+  }
+}

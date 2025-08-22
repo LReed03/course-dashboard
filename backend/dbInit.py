@@ -36,7 +36,7 @@ Tasks = db.Table(
     'Tasks', metadata,
     db.Column('id', db.Integer, primary_key=True),
     db.Column('uid', db.String(255), db.ForeignKey("User.Id")),    
-    db.Column('course_id', db.Integer, db.ForeignKey("Class.id")),     
+    db.Column('courseId', db.Integer, db.ForeignKey("Class.id")),     
     db.Column('title', db.String(255)),
     db.Column('startDate', db.String(50)),   
     db.Column('dueDate', db.String(50)),     
