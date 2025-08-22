@@ -71,6 +71,7 @@ def update_task(task_id):
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
     task = request.json
+    courseId = task["courseId"]
     edittask(uid, task)
     return {"message": "Task updated", "task": task}, 200   
 

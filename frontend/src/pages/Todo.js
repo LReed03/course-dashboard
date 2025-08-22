@@ -9,7 +9,7 @@ function Todo() {
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
-  const [courseID, setCourseID] = useState("");
+  const [courseId, setCourseId] = useState(0);
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
   
@@ -51,7 +51,7 @@ function handleAdd() {
 
   const newTask = {
     title: input,
-    courseId: courseID,
+    courseId: courseId,
     startDate: finalStart,  
     dueDate: dueDate,
     calendarcheck: document.getElementById("calendar-check").checked
@@ -114,10 +114,10 @@ function verifyDate(task) {
       <Header />
       <div className="todo-container">
         <div className="todo">
-          <select onChange={(e) => setCourseID(e.target.value)}>
-            <option value="">No Course</option>
+          <select onChange={(e) => setCourseId(e.target.value)}>
+            <option value={0}>No Course</option>
             {courses.map(course =>
-            <option key={course.id} value={course.id}>
+            <option key={course.id} value={parseInt(course.id)}>
               {course.code}
             </option>
           )}</select>

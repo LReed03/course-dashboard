@@ -22,9 +22,9 @@ Class = db.Table('Class', metadata,
                  )
 
 Schedule = db.Table('Schedule', metadata,
-               db.Column('id', db.Integer, primary_key=True),
+               db.Column('id', db.Integer(), primary_key=True),
                db.Column('uid', db.String(255), db.ForeignKey("User.Id")),   
-               db.Column('course_id', db.Integer, db.ForeignKey("Class.id", ondelete="CASCADE")),
+               db.Column('course_id', db.Integer(), db.ForeignKey("Class.id", ondelete="CASCADE")),
                db.Column('type', db.String(255)),       # "Lecture", "Lab", etc.
                db.Column('days', db.String(255)),       # store as comma-separated: "Mon,Wed,Fri"
                db.Column('startTime', db.String(50)),   
