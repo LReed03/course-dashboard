@@ -19,7 +19,7 @@ function Course({course, tasks, setTasks, setCourses}) {
       
     function renderTasks() {
         return tasks
-            .filter((task) => String(task.course) === String(course.id))
+            .filter((task) => String(task.courseId) === String(course.id))
             .map((task) => (
                 <div className="list-items" key={task.id}>
                     <div className="course-task-text">
