@@ -62,10 +62,11 @@ def addtask(uid, task):
         conn.execute(query)
 
 
-def edittask(uid, task):
-    query = db.update(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.id == task['id'])).values( title = task['title'], startDate = task['startDate'], dueDate = task['dueDate'], calendarcheck = task["calendarcheck"])
+def edittask(uid, task, taskid):
+    query = db.update(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.id == taskid)).values( title = task['title'], courseId = task['courseId'], startDate = task['startDate'], dueDate = task['dueDate'], calendarcheck = task["calendarcheck"])
     with engine.begin() as conn:
         result = conn.execute(query)
+        print("After DB Request", result)
         return result.rowcount
 
 def deletetask(uid, taskid):

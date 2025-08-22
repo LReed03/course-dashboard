@@ -11,7 +11,7 @@ function TaskEditor() {
   const { id } = useParams();
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
-  const [courseID, setCourseID] = useState("");
+  const [courseId, setCourseId] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [task, setTask] = useState({
@@ -30,7 +30,7 @@ function TaskEditor() {
     if(match) {
         setTask(match);
         setInput(match.title);
-        setCourseID(match.course);
+        setCourseId(match.courseId);
         setDueDate(match.dueDate);
     }
   }
@@ -66,7 +66,7 @@ function TaskEditor() {
       const newTask = {
         id: task.id,
         title: input,
-        course: courseID,
+        courseId: courseId,
         startDate: finalStart,
         dueDate: dueDate,
         calendarcheck: document.getElementById("calendar-check").checked
@@ -95,8 +95,8 @@ function TaskEditor() {
         <Header />
         <div className="task-editor-container">
             <div className="todo">
-                <select onChange={(e) => setCourseID(e.target.value)} value={courseID}>
-                    <option value="">No Course</option>
+                <select onChange={(e) => setCourseId(e.target.value)} value={courseId}>
+                    <option value={0}>No Course</option>
                     {courses.map(course =>
                     <option key={course.id} value={course.id}>
                     {course.code}

@@ -19,6 +19,7 @@ function Todo() {
     let courseList = await loadCourses();
     setTasks(taskList);                 
     setCourses(courseList);
+    console.log(taskList)
   }
 
   useEffect(() => {
@@ -49,11 +50,20 @@ function handleAdd() {
     setStartDate(finalStart); 
   }
 
+  let finalDue = dueDate;
+
+  if (finalDue === "" && startDate){
+    let date = new Date(startDate);
+    date.setHours(date.getHours() + 1);
+    finalDue = formatDateTimeLocal(date);
+    setDueDate(finalDue);
+  }
+
   const newTask = {
     title: input,
     courseId: courseId,
     startDate: finalStart,  
-    dueDate: dueDate,
+    dueDate: finalDue,
     calendarcheck: document.getElementById("calendar-check").checked
   };
 
@@ -97,7 +107,7 @@ function verifyDate(task) {
       <div className="task-text">
         <li>{task.title}</li>'
         <p className="course-name">
-          {courses.find(course => course.id === Number(task.course))?.name || "No Course"}
+          {courses.find(course => course.id === Number(task.courseId))?.name || "No Course"}
         </p>
         <p className="due-date">{task.dueDate ? task.dueDate.substring(0, 10) : "No due date"}</p>
       </div>

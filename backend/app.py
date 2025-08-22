@@ -50,6 +50,7 @@ def add_task():
         jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task:
+        print(task)
         addtask(uid, task)
         return jsonify({"message": "Task added"}), 201
     return jsonify({"error": "No task provided"}), 400
@@ -71,8 +72,7 @@ def update_task(task_id):
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
     task = request.json
-    courseId = task["courseId"]
-    edittask(uid, task)
+    edittask(uid, task, task_id)
     return {"message": "Task updated", "task": task}, 200   
 
 
@@ -124,6 +124,7 @@ def update_course(course_id):
     if not uid:
         jsonify({"error": "Unauthorized"}), 401 
     course = request.json
+    print("Before DB Request", course)
     editclass(uid, course, course_id)
     return {"message": "Course updated", "course": course}, 200
 
