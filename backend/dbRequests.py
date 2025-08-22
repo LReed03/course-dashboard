@@ -92,9 +92,12 @@ def deleteschedule(uid, schedule):
 # User DB Requests
 
 def createuser(uid):
-    query = db.insert(User).values(Id = uid)
-    with engine.begin() as conn:
-        conn.execute(query)
+    try:
+        query = db.insert(User).values(Id = uid)
+        with engine.begin() as conn:
+            conn.execute(query)
+    except:
+        print("user already exists")
 
 def deleteuser(uid):
     return
