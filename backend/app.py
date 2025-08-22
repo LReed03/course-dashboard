@@ -61,7 +61,7 @@ def delete_task():
         jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task:
-        deletetask(task)
+        deletetask(uid, task["id"])
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 

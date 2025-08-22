@@ -8,7 +8,7 @@ metadata = db.MetaData()
 # Adding table names
 Class = db.Table('Class', metadata, autoload_with=engine)
 
-Task = db.Table('Task', metadata, autoload_with=engine)
+Tasks = db.Table('Tasks', metadata, autoload_with=engine)
 
 User = db.Table('User', metadata, autoload_with=engine)
 
@@ -46,13 +46,13 @@ def deleteclass(uid, courseid):
 # Task DB Requests
 
 def loadtasks(uid):
-    query = db.select(Task).where((Task.c.uid == uid))
+    query = db.select(Tasks).where((Tasks.c.uid == uid))
     result = conn.execute(query)
     rows = [dict(row._mapping) for row in result]  # convert to dict
     return rows
 
 def addtask(uid, task):
-    query = db.insert(Task).values(uid = uid, 
+    query = db.insert(Tasks).values(uid = uid, 
                                    courseId = task['course'], 
                                    title = task['title'],
                                    startDate = task['startDate'],
@@ -63,13 +63,13 @@ def addtask(uid, task):
 
 
 def edittask(uid, task):
-    query = db.update(Task).where((Task.c.uid == uid) & (Task.c.id == Task['id'])).values(name = course['name'], code = course['code'], professor = course['professor'], location = course['location'])
+    query = db.update(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.id == task['id'])).values(courseId = task['course'], title = task['title'], startDate = task['startDate'], dueDate = task['dueDate'], calendarcheck = task["calendarcheck"])
     with engine.begin() as conn:
         result = conn.execute(query)
         return result.rowcount
 
 def deletetask(uid, taskid):
-    query = db.delete(Task).where((Task.c.uid == uid) & (Task.c.id == taskid))
+    query = db.delete(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.id == taskid))
     with engine.begin() as conn:
         conn.execute(query)
 
