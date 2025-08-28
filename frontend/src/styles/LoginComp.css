@@ -103,7 +103,17 @@
   text-decoration: none;
 }
 
+.forgot-password-link {
+  font-weight: 400;
+  color: #2563eb;
+  text-decoration: none;
+}
+
 .signup-link:hover {
+  text-decoration: underline;
+}
+
+.forgot-password-link:hover {
   text-decoration: underline;
 }
 

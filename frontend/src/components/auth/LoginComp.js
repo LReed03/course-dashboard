@@ -99,6 +99,7 @@ function LoginComp(){
                     Don't have an account?{" "}
                     <Link to='/signup' className="signup-link">Sign up</Link>
                 </p>
+                <Link to='' className="forgot-password-link">Forgot your password?</Link>
 
                 <div className="divider">
                     <span>OR</span>
