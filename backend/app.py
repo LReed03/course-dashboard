@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import auth, credentials
 import os
-from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser, loadtasks, addtask, edittask, deletetask
+from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser, loadtasks, addtask, edittask, deletetask, loadschedule, editschedule, addschedule, deleteschedule
 
 app = Flask(__name__)
 CORS(app)
@@ -82,26 +82,31 @@ def update_task(task_id):
 def get_courses():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
         print("not verified")
+        return jsonify({"error": "Unauthorized"}), 401
     courses = loadclasses(uid)
     for c in courses:
-        if not c.get("schedule"):   
-            c["schedule"] = DEFAULT_SCHEDULE
+        schedule = loadschedule(uid, c["id"])
+        if schedule:
+            c["schedule"] = schedule
+        else:
+            c["schedule"] = [dict(DEFAULT_SCHEDULE[0])]
 
-    return jsonify(courses)
+    return jsonify(courses), 200
+
 
 
 @app.route("/courses", methods=["POST"])
 def add_course():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
+        return jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course:
-        addclass(uid, course)
-        if course['schedule']:
-            return
+        courseId = addclass(uid, course)
+        if course['schedule'] != DEFAULT_SCHEDULE:
+            for sched in course['schedule']:
+                addschedule(uid, sched, courseId)
         return jsonify({"message": "Course added"}), 201
     return jsonify({"error": "No course provided"}), 400
 
@@ -114,7 +119,7 @@ def delete_course():
     if course:
         courseid = course['id']
         deleteclass(uid, courseid)
-        # make sure to remove schedules assosiated with course 
+        deleteschedule(uid, courseid)
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 

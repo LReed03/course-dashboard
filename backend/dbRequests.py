@@ -12,6 +12,8 @@ Tasks = db.Table('Tasks', metadata, autoload_with=engine)
 
 User = db.Table('User', metadata, autoload_with=engine)
 
+Schedule = db.Table('Schedule', metadata, autoload_with=engine)
+
 
 # Class DB Requests
 
@@ -22,13 +24,22 @@ def loadclasses(uid):
     return rows
 
 def addclass(uid, course):
-    query = db.insert(Class).values(uid = uid, 
-                                    name = course['name'], 
-                                    code = course['code'], 
-                                    professor = course['professor'], 
-                                    location = course['location'])
+    query = (
+        db.insert(Class)
+        .values(
+            uid=uid,
+            name=course['name'],
+            code=course['code'],
+            professor=course['professor'],
+            location=course['location']
+        )
+        .returning(Class.c.id)   # ask DB to give back the generated PK
+    )
     with engine.begin() as conn:
-        conn.execute(query)
+        result = conn.execute(query)
+        new_id = result.scalar_one()   # fetch the returned id
+    return new_id
+
 
 def editclass(uid, course, course_id):
     query = db.update(Class).where((Class.c.uid == uid) & (Class.c.id == course_id)).values(name = course['name'], code = course['code'], professor = course['professor'], location = course['location'])
@@ -60,6 +71,7 @@ def addtask(uid, task):
                                    calendarcheck = task['calendarcheck'])
     with engine.begin() as conn:
         conn.execute(query)
+         
 
 
 def edittask(uid, task, taskid):
@@ -78,16 +90,41 @@ def deletetask(uid, taskid):
 # Schedule DB Requests
 
 def loadschedule(uid, courseId):
-    return
+    query = db.select(Schedule).where(
+        (Schedule.c.uid == uid) & (Schedule.c.course_id == courseId)
+    )
+    with engine.begin() as conn:
+        result = conn.execute(query)
+        rows = []
+        for row in result:
+            r = dict(row._mapping)
+            if r.get("days"):
+                r["days"] = r["days"].split(",")
+            else:
+                r["days"] = []
+            rows.append(r)
+        return rows
 
-def addschedule(uid, schedule):
-    return
+def addschedule(uid, schedule, courseid):
+    days=",".join(schedule['days'])
+    query = db.insert(Schedule).values(uid = uid,
+                                    course_id = courseid,
+                                    type = schedule['type'],
+                                    days = days,
+                                    startTime = schedule['startTime'],
+                                    endTime = schedule['endTime']    )
+    with engine.begin() as conn:
+        conn.execute(query)
 
 def editschedule(uid, schedule):
+    days=",".join(schedule['days'])
     return
 
-def deleteschedule(uid, schedule):
-    return
+def deleteschedule(uid, courseId):
+    query = db.delete(Schedule).where((Schedule.c.uid == uid) & (Schedule.c.course_id == courseId))
+    with engine.begin() as conn:
+        conn.execute(query)
+        
 
 # User DB Requests
 
