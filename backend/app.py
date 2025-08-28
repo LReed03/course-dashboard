@@ -131,6 +131,8 @@ def update_course(course_id):
     course = request.json
     print("Before DB Request", course)
     editclass(uid, course, course_id)
+    if course['schedule'] != DEFAULT_SCHEDULE:
+        editschedule(uid, course_id, course['schedule'])
     return {"message": "Course updated", "course": course}, 200
 
 # User

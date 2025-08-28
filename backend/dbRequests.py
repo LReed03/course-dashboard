@@ -116,9 +116,26 @@ def addschedule(uid, schedule, courseid):
     with engine.begin() as conn:
         conn.execute(query)
 
-def editschedule(uid, schedule):
-    days=",".join(schedule['days'])
-    return
+def editschedule(uid, courseid, schedules):
+    with engine.begin() as conn:
+        conn.execute(
+            Schedule.delete().where(
+                (Schedule.c.uid == uid) & (Schedule.c.course_id == courseid)
+            )
+        )
+
+        for sched in schedules:
+            conn.execute(
+                db.insert(Schedule).values(
+                    uid=uid,
+                    course_id=courseid,
+                    type=sched["type"],
+                    days=",".join(sched["days"]),
+                    startTime=sched["startTime"],
+                    endTime=sched["endTime"]
+                )
+            )
+
 
 def deleteschedule(uid, courseId):
     query = db.delete(Schedule).where((Schedule.c.uid == uid) & (Schedule.c.course_id == courseId))
