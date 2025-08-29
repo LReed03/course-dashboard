@@ -38,7 +38,7 @@ def verify_token():
 def get_tasks():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401
+        return jsonify({"error": "Unauthorized"}), 401
         print("not verified")
     tasks = loadtasks(uid)  
     return jsonify(tasks)
@@ -47,7 +47,7 @@ def get_tasks():
 def add_task():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
+        return jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task:
         print(task)
@@ -59,7 +59,7 @@ def add_task():
 def delete_task():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
+        return jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     if task:
         deletetask(uid, task["id"])
@@ -70,7 +70,7 @@ def delete_task():
 def update_task(task_id):
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
+        return jsonify({"error": "Unauthorized"}), 401 
     task = request.json
     edittask(uid, task, task_id)
     return {"message": "Task updated", "task": task}, 200   
@@ -114,7 +114,7 @@ def add_course():
 def delete_course():
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
+        return jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     if course:
         courseid = course['id']
@@ -127,7 +127,7 @@ def delete_course():
 def update_course(course_id):
     uid = verify_token()
     if not uid:
-        jsonify({"error": "Unauthorized"}), 401 
+        return jsonify({"error": "Unauthorized"}), 401 
     course = request.json
     print("Before DB Request", course)
     editclass(uid, course, course_id)
