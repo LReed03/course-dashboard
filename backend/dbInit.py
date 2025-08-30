@@ -1,6 +1,9 @@
 import sqlalchemy as db
+import os
 
-engine = db.create_engine("sqlite:///backend/app.db")
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+engine = db.create_engine(DATABASE_URL)
 
 conn = engine.connect() 
 metadata = db.MetaData()

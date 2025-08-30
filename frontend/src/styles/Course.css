@@ -88,7 +88,7 @@
 }
 
 .task-container {
-  background-color: #f0f4ff;
+  background-color: #eaf0ff;
   padding: 20px;
   border-radius: 16px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
@@ -114,22 +114,7 @@
   align-items: center;
 }
 
-.task input[type="checkbox"] {
-  appearance: none;
-  background-color: #2ecc71;
-  padding: 6px 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
 
-.task input[type="checkbox"]:hover {
-  background-color: #27ae60;
-}
 
 .buttons{
   display: flex;
