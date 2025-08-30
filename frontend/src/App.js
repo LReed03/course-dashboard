@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VerifyPage from './pages/VerifyPage';
 import RequireVerified from './components/auth/RequireVerified';
+import ForgotPassword from './pages/ForgotPassword';
 
 
 
@@ -28,7 +29,8 @@ function App() {
         <Route path="/dashboard/coursecreation" element={<RequireVerified><CourseCreation/></RequireVerified>} />
         <Route path="/edit-course/:id" element={<RequireVerified><CourseEditor /></RequireVerified>} />
         <Route path="/edit-task/:id" element={<RequireVerified><TaskEditor/></RequireVerified>} />
-        <Route path="verifypage" element={<VerifyPage/>}/>
+        <Route path="/verifypage" element={<VerifyPage/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
       </Routes>
     </div>
   );
