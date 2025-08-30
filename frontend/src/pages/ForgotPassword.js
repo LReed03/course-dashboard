@@ -8,16 +8,22 @@ import { doPasswordReset } from "../firebase/Auth";
 function ForgotPassword(){
     const [email, setEmail] = useState("");
     const [emailSent, setEmailSent] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("")
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if(!emailSent){
-            setEmailSent(true);
-            await doPasswordReset(email).catch(err => {
-                setEmailSent(false);
-            });
+
+        try {
+            await doPasswordReset(email);
+            setEmailSent(true);  
+        } 
+        catch (err) {
+            console.error("Password reset failed:", err);
+            setEmailSent(false); 
+            setErrorMessage("Invalid Email")
         }
-    }
+    };
+
 
     return(
         <div>
@@ -29,13 +35,18 @@ function ForgotPassword(){
                     <label htmlFor="email">Email</label>
                     <input type="email" autoComplete="email" 
                         value={email}  
-                        onChange={(e) => { setEmail(e.target.value) }} 
+                        onChange={(e) => { 
+                            setEmail(e.target.value);
+                            setErrorMessage("");
+                         }} 
                         name="email" 
                         placeholder="Enter Your Email" 
                         required>
                     </input>
+                    <p className="error">{errorMessage}</p>
                     <button type="submit">Reset Password</button>
                     <Link to='/login'>Back to Login</Link>
+                    
                 </form> : <div className="forgot-password-container">
                     <h2>Email sent</h2>
                     <p>A reset link has been sent to your email. Be sure to check your Spam or Junk folder if it doesn’t appear in your inbox.</p>
