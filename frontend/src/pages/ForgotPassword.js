@@ -36,7 +36,11 @@ function ForgotPassword(){
                     </input>
                     <button type="submit">Reset Password</button>
                     <Link to='/login'>Back to Login</Link>
-                </form> : <div><p>Email sent</p></div>}
+                </form> : <div className="forgot-password-container">
+                    <h2>Email sent</h2>
+                    <p>A reset link has been sent to your email. Be sure to check your Spam or Junk folder if it doesn’t appear in your inbox.</p>
+                    <Link to='/login'>Back to Login</Link>
+                    </div>}
             </div>
             <Footer/>
         </div>
