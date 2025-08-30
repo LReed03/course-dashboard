@@ -3,19 +3,27 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/ForgotPassword.css";
 import { Link } from "react-router-dom";
+import { doPasswordReset } from "../firebase/Auth";
 
 function ForgotPassword(){
     const [email, setEmail] = useState("");
+    const [emailSent, setEmailSent] = useState(false);
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        if(!emailSent){
+            setEmailSent(true);
+            await doPasswordReset(email).catch(err => {
+                setEmailSent(false);
+            });
+        }
     }
 
     return(
         <div>
             <Header/>
             <div className="forgot-password-body">
-                <form className="forgot-password-container" onSubmit={onSubmit}>
+                {!emailSent ? <form className="forgot-password-container" onSubmit={onSubmit}>
                     <h2>Reset Password</h2>
                     <p>Provide the email associated with your account to recover your password.</p>
                     <label htmlFor="email">Email</label>
@@ -28,7 +36,7 @@ function ForgotPassword(){
                     </input>
                     <button type="submit">Reset Password</button>
                     <Link to='/login'>Back to Login</Link>
-                </form>
+                </form> : <div><p>Email sent</p></div>}
             </div>
             <Footer/>
         </div>
