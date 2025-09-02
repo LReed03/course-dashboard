@@ -1,5 +1,5 @@
 import { apiFetch } from "./AuthAPI";
-const APIURL = "http://localhost:5000/tasks";
+const APIURL = "https://backend-1048869674721.northamerica-northeast1.run.app/tasks";
 
 
 export async function addTask(task){

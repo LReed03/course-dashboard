@@ -1,5 +1,5 @@
 import { apiFetch } from "./AuthAPI";
-const APIURL = "http://localhost:5000/courses";
+const APIURL = "https://backend-1048869674721.northamerica-northeast1.run.app/courses";
 
 export async function loadCourses(){
     try{

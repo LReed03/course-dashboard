@@ -7,10 +7,19 @@ from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser
 
 app = Flask(__name__)
 CORS(app)
-cred_path = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]  # path to your JSON
-cred = credentials.Certificate(cred_path)                  # or: credentials.ApplicationDefault
-default_app = firebase_admin.initialize_app()
+if not firebase_admin._apps:
+    cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    if cred_path:
+        cred = credentials.Certificate(cred_path)
+    elif os.getenv("K_SERVICE"):
+        cred = credentials.ApplicationDefault()
+    else:
+        raise RuntimeError("No Firebase credentials configured")
+    firebase_admin.initialize_app(cred)
 
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is not set")
 
 tasks = []
 courses = []
