@@ -1,6 +1,5 @@
 import { apiFetch } from "./AuthAPI";
-const APIURL = "https://backend-1048869674721.northamerica-northeast1.run.app/tasks";
-
+const APIURL = `${process.env.REACT_APP_API_URL}/tasks`
 
 export async function addTask(task){
     try{
