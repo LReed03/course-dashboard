@@ -125,7 +125,7 @@ function verifyDate(task) {
       <div className="todo-container">
         <div className="todo">
           <select onChange={(e) => setCourseId(e.target.value)}>
-            <option value={0}>No Course</option>
+            <option value={null}>No Course</option>
             {courses.map(course =>
             <option key={course.id} value={parseInt(course.id)}>
               {course.code}
