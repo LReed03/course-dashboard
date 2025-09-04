@@ -25,3 +25,6 @@ yarn-debug.log*
 yarn-error.log*
 
 dev.db
+frontend/.firebase/hosting.YnVpbGQ.cache
+frontend/.firebase/hosting.YnVpbGQ.cache
+frontend/build/asset-manifest.json

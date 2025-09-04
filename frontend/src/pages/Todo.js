@@ -9,7 +9,7 @@ function Todo() {
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
-  const [courseId, setCourseId] = useState();
+  const [courseId, setCourseId] = useState(null);
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
   
