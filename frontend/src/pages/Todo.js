@@ -9,7 +9,7 @@ function Todo() {
   const [tasks, setTasks] = useState([]);
   const [courses, setCourses] = useState([]);
   const [input, setInput] = useState("");
-  const [courseId, setCourseId] = useState(0);
+  const [courseId, setCourseId] = useState();
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
   
@@ -124,8 +124,9 @@ function verifyDate(task) {
       <Header />
       <div className="todo-container">
         <div className="todo">
-          <select onChange={(e) => setCourseId(e.target.value)}>
-            <option value={null}>No Course</option>
+          <select onChange={(e) => {const v = e.target.value; 
+          setCourseId(v === "" ? null : Number(v));}}>
+            <option value="">No Course</option>
             {courses.map(course =>
             <option key={course.id} value={parseInt(course.id)}>
               {course.code}
