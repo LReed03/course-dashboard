@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 import firebase_admin
 from firebase_admin import auth, credentials
 import os
-from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser, loadtasks, addtask, edittask, deletetask, loadschedule, editschedule, addschedule, deleteschedule
+from dbRequests import loadclasses, addclass, editclass, deleteclass, createuser, loadtasks, addtask, edittask, deletetask, loadschedule, editschedule, addschedule, deleteschedule, deletecoursetask
 
 app = Flask(__name__)
 CORS(app)
@@ -127,9 +127,9 @@ def delete_course():
     course = request.json
     if course:
         courseid = course['id']
-        deleteclass(uid, courseid)
+        deletecoursetask(uid, courseid)
         deleteschedule(uid, courseid)
-        ## add delete all courses for a class when the course is deleted
+        deleteclass(uid, courseid)
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 

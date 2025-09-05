@@ -88,6 +88,10 @@ def deletetask(uid, taskid):
     with engine.begin() as conn:
         conn.execute(query)
 
+def deletecoursetask(uid, courseId):
+    query = db.delete(Tasks).where((Tasks.c.uid == uid) & (Tasks.c.courseId == courseId))
+    with engine.begin() as conn:
+        conn.execute(query)
 
 # Schedule DB Requests
 
