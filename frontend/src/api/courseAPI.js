@@ -1,5 +1,5 @@
 import { apiFetch } from "./AuthAPI";
-const APIURL = "https://backend-1048869674721.northamerica-northeast1.run.app/courses";
+const APIURL = `${process.env.REACT_APP_API_URL}/courses`
 
 export async function loadCourses(){
     try{

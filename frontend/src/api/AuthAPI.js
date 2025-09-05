@@ -1,4 +1,5 @@
 import { getAuth } from "firebase/auth";
+const apiUrl = process.env.REACT_APP_API_URL;
 
 export async function apiFetch(path, options = {}) {
   const auth = getAuth();
@@ -35,7 +36,7 @@ export async function apiFetch(path, options = {}) {
 
 export async function signup(){
   try{
-    await apiFetch("https://backend-1048869674721.northamerica-northeast1.run.app/signup", {
+    await apiFetch(`${apiUrl}/signup`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

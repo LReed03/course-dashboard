@@ -129,6 +129,7 @@ def delete_course():
         courseid = course['id']
         deleteclass(uid, courseid)
         deleteschedule(uid, courseid)
+        ## add delete all courses for a class when the course is deleted
         return jsonify({"message": "Task removed"}), 201
     return jsonify({"error": "No task provided"}), 400
 
