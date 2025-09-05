@@ -15,10 +15,10 @@ function Todo() {
   
 
   async function fetchData() {
-    let taskList = await loadTasks();
     let courseList = await loadCourses();
-    setTasks(taskList);                 
     setCourses(courseList);
+    let taskList = await loadTasks();
+    setTasks(taskList);                 
     console.log(taskList)
   }
 
