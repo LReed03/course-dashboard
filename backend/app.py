@@ -21,8 +21,6 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL is not set")
 
-tasks = []
-courses = []
 DEFAULT_SCHEDULE = [
     {"type": "Lecture", "days": [], "startTime": "", "endTime": ""}
 ]
@@ -48,7 +46,6 @@ def get_tasks():
     uid = verify_token()
     if not uid:
         return jsonify({"error": "Unauthorized"}), 401
-        print("not verified")
     tasks = loadtasks(uid)  
     return jsonify(tasks)
 
