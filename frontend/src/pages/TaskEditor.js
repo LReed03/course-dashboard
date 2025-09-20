@@ -18,9 +18,12 @@ function TaskEditor() {
       id: id,
       title: "",
       course: "",
-      dueDate: ""
+      startDate: "",
+      dueDate: "",
+      calendarcheck: false
   });
   const navigate = useNavigate();
+  const [calendarCheck, setCalendarCheck] = useState(false);
 
   async function fetchData() {
     let courseList = await loadCourses();
@@ -32,6 +35,8 @@ function TaskEditor() {
         setInput(match.title);
         setCourseId(match.courseId);
         setDueDate(match.dueDate);
+        setStartDate(match.startDate);
+        setCalendarCheck(match.calendarcheck);
     }
   }
 
@@ -108,7 +113,7 @@ function TaskEditor() {
                 <label for="DueDate">Due Date</label>
                 <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59" name="dueDate" id="dueDate"/>
                 <label for="calendar-check">Include in Calendar</label>
-                <input type="checkbox" id="calendar-check" value={task.calendarcheck}></input>
+                <input type="checkbox" id="calendar-check" value={calendarCheck}></input>
                 <button onClick={handleEdit}>Save Changes</button>
                 </div>
             </div>
