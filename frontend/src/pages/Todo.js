@@ -72,7 +72,10 @@ function handleAdd() {
   addTask(newTask);
   console.log("New Task Added:", newTask);
   setInput("");
-  fetchData();
+  setStartDate("");
+  setDueDate("");
+  setCourseId(null);
+  fetchData(); 
 }
 
 
