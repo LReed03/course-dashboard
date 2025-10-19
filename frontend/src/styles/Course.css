@@ -55,21 +55,6 @@
   font-size: 0.95rem;
 }
 
-.course #remove-class {
-  background-color: #e74c3c;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-top: 20px;
-  transition: background-color 0.2s ease;
-}
-
-.course #remove-class:hover {
-  background-color: #c0392b;
-}
 
 .course #edit-class{
   background-color: #4A90E2;

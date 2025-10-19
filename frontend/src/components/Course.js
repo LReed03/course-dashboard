@@ -3,6 +3,7 @@ import "../styles/Course.css";
 import { deleteTask } from "../api/TodoAPI";
 import { deleteCourse } from "../api/courseAPI";
 import { useNavigate } from "react-router-dom";
+import ConfirmDelete from "./ConfirmDelete";
 
 function Course({course, tasks, setTasks, setCourses}) {
     const navigate = useNavigate();
@@ -64,7 +65,7 @@ function Course({course, tasks, setTasks, setCourses}) {
         )}
             <div className="buttons"> 
                 <button id="edit-class" onClick={() => navigate(`/edit-course/${course.id}`)}>Edit</button>
-                <button id="remove-class" onClick={() => removeCourse(course)}>Remove Class</button>
+                <ConfirmDelete title={course.name} ConfirmDelete={() => removeCourse(course)}></ConfirmDelete>
             </div>
         </div>
      );
