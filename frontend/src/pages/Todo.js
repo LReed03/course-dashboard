@@ -12,6 +12,7 @@ function Todo() {
   const [courseId, setCourseId] = useState(null);
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [dateOpen, setDateOpen] = useState(false);
   
   
 
@@ -76,6 +77,7 @@ function handleAdd() {
   setStartDate("");
   setDueDate("");
   setCourseId(null);
+  setDateOpen(false);
   fetchData(); 
 }
 
@@ -137,10 +139,15 @@ function verifyDate(task) {
             </option>
           )}</select>
           <input type="text" placeholder="Add a new task" value={input} onChange={(e) => setInput(e.target.value)}/>
-          <label for="startDate">Start Date </label>
-          <input type="datetime-local" value={startDate} onChange={(e) => setStartDate(e.target.value)} max="9999-12-31T23:59" name="startDate" id="startDate"/>
-          <label for="DueDate">Due Date</label>
-          <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59" name="dueDate" id="dueDate"/>
+          { dateOpen && 
+          <>
+            <label for="startDate">Start Date </label>
+            <input type="datetime-local" value={startDate} onChange={(e) => setStartDate(e.target.value)} max="9999-12-31T23:59" name="startDate" id="startDate"/>
+            <label for="DueDate">Due Date</label>
+            <input type="datetime-local" value={dueDate} onChange={(e) => setDueDate(e.target.value)} max="9999-12-31T23:59" name="dueDate" id="dueDate"/>
+          </>
+          }
+          <button onClick={() => setDateOpen(!dateOpen)}>Toggle Date</button>
           <label for="calendar-check">Include in Calendar</label>
           <input type="checkbox" id="calendar-check" defaultChecked ></input>
           <button onClick={handleAdd}>Add Task</button>
