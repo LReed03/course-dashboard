@@ -16,7 +16,7 @@ function Header() {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">CourseTrack</Link>
+        <Link to="/">Classify</Link>
       </div>
       {!userLoggedIn ? (
       <nav className="nav-links">
