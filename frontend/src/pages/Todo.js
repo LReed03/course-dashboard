@@ -13,6 +13,7 @@ function Todo() {
   const [dueDate, setDueDate] = useState("");
   const [startDate, setStartDate] = useState("");
   const [dateOpen, setDateOpen] = useState(false);
+  const [loaded, setIsLoaded] = useState(false);
   
   
 
@@ -21,11 +22,12 @@ function Todo() {
     setCourses(courseList);
     let taskList = await loadTasks();
     setTasks(taskList);                 
-    console.log(taskList)
+    console.log(taskList);
   }
 
   useEffect(() => {
     fetchData();
+    setIsLoaded(true);
   }, []);
 
 function formatDateTimeLocal(date) {
@@ -152,8 +154,10 @@ function verifyDate(task) {
           <input type="checkbox" id="calendar-check" defaultChecked ></input>
           <button onClick={handleAdd}>Add Task</button>
         </div>
-        {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}
-        
+        {loaded ?
+        {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}:
+        <p>Loading...</p>
+        }
       </div>
       <Footer/>
     </div>
