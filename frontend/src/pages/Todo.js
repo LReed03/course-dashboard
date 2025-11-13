@@ -156,7 +156,7 @@ function verifyDate(task) {
         </div>
         {loaded ?
         (tasks.length > 0 ? <ul>{listTasks}</ul> : null) : 
-        (<p>Loading...</p>)
+        (<p className="loading-text">Loading...</p>)
         }
       </div>
       <Footer/>
