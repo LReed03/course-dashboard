@@ -155,8 +155,8 @@ function verifyDate(task) {
           <button onClick={handleAdd}>Add Task</button>
         </div>
         {loaded ?
-        {tasks.length > 0 ? <ul>{listTasks}</ul> : <div></div>}:
-        <p>Loading...</p>
+        (tasks.length > 0 ? <ul>{listTasks}</ul> : null) : 
+        (<p>Loading...</p>)
         }
       </div>
       <Footer/>
