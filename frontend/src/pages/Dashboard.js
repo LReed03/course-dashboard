@@ -10,12 +10,14 @@ import "../styles/Dashboard.css";
 function Dashboard() {
   const [courses, setCourses] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   async function fetchData() {
     let taskList = await loadTasks();
     let courseList = await loadCourses();
     setTasks(taskList);                 
     setCourses(courseList);
+    setLoaded(true);
     }
 
     
@@ -38,7 +40,11 @@ function Dashboard() {
       <Header/>
       <div  className="dashboard-page">
         <div  className="dashboard-container">
-          {courses.length > 0 ? renderCourses() : <p className="no-courses">No courses available.</p>}
+          {loaded ?
+          (courses.length > 0 ? renderCourses() : <p className="no-courses">No courses available.</p>) 
+          :
+          (<p className="no-courses">Loading...</p>)
+          }
         </div>
         <Link to="coursecreation" id="create-class-button">Add Class</Link>
       </div>
