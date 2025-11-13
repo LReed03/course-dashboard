@@ -23,11 +23,11 @@ function Todo() {
     let taskList = await loadTasks();
     setTasks(taskList);                 
     console.log(taskList);
+    setIsLoaded(true);
   }
 
   useEffect(() => {
     fetchData();
-    setIsLoaded(true);
   }, []);
 
 function formatDateTimeLocal(date) {
