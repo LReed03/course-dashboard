@@ -18,9 +18,11 @@ function Todo() {
   
 
   async function fetchData() {
-    let courseList = await loadCourses();
+    const [courseList, taskList] = await Promise.all([
+      loadCourses(),
+      loadTasks()
+    ]);
     setCourses(courseList);
-    let taskList = await loadTasks();
     setTasks(taskList);                 
     console.log(taskList);
     setIsLoaded(true);

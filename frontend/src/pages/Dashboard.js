@@ -13,8 +13,10 @@ function Dashboard() {
   const [loaded, setLoaded] = useState(false);
 
   async function fetchData() {
-    let taskList = await loadTasks();
-    let courseList = await loadCourses();
+    const [taskList, courseList] = await Promise.all([
+      loadTasks(),
+      loadCourses()
+    ])
     setTasks(taskList);                 
     setCourses(courseList);
     setLoaded(true);
